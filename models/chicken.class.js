@@ -20,13 +20,7 @@ class Chicken extends MoveableObject {
 
     animateWalking() {
         setInterval(() => {
-            let i = this.currentImage % this.IMAGES_WALKING.length; // Modulo Operator vergleicht 0 mit 5 (0/5 = 0, rest 5. Am Ende wird es 1 und zählt von vorne).
-            let path = this.IMAGES_WALKING[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-            if (this.currentImage == 5) {
-                this.currentImage = 0;
-            }
+            this.playAnimation(this.IMAGES_WALKING);
         }, 200);
     }
 
