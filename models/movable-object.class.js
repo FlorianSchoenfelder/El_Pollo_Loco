@@ -26,9 +26,23 @@ class MoveableObject {
 
   playAnimation(images) {
     let i = this.currentImage % this.IMAGES_WALKING.length; // Modulo Operator vergleicht 0 mit 5 (0/5 = 0, rest 5. Am Ende wird es 1 und zählt von vorne).
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+    let path = images[i];
+    this.img = this.imageCache[path];
+    this.currentImage++;
+  }
+
+  playAnimationIdle(images) {
+    let i = this.currentImage % this.IMAGES_IDLE.length; // Modulo Operator vergleicht 0 mit 5 (0/5 = 0, rest 5. Am Ende wird es 1 und zählt von vorne).
+    let path = images[i];
+    this.img = this.imageCache[path];
+    this.currentImage++;
+  }
+  
+  playAnimationLongIdle(images) {
+    let i = this.currentImage % this.IMAGES_LONG_IDLE.length; // Modulo Operator vergleicht 0 mit 5 (0/5 = 0, rest 5. Am Ende wird es 1 und zählt von vorne).
+    let path = images[i];
+    this.img = this.imageCache[path];
+    this.currentImage++;
   }
 
   moveRight() {
@@ -41,5 +55,4 @@ class MoveableObject {
     }, 1000 / 120);
     console.log("Moving Left");
   }
-  
 }
