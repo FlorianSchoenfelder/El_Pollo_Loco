@@ -1,5 +1,4 @@
 class MoveableObject extends DrawableObject {
-  
   speed = 0.2;
   speedY = 0;
   acceleration = 1;
@@ -8,18 +7,21 @@ class MoveableObject extends DrawableObject {
 
   lastHit = 0;
 
-  
+  offset = {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  };
 
-  
-
-  isColliding(mo) {
-    return (
-      this.x + this.width > mo.x &&
-      this.y + this.height > mo.y &&
-      this.x < mo.x &&
-      this.y < mo.y + mo.height
-    );
-  }
+  // isColliding(mo) {
+  //   return (
+  //     this.x + this.width > mo.x &&
+  //     this.y + this.height > mo.y &&
+  //     this.x < mo.x +mo.width &&
+  //     this.y < mo.y + mo.height
+  //   );
+  // }
 
   hit() {
     this.energy -= 5;
@@ -40,15 +42,13 @@ class MoveableObject extends DrawableObject {
     return this.energy == 0;
   }
 
-  // isColliding(obj) { // Bessere Formel für später
-  //   return (
-  //     this.x + this.width >= obj.x &&
-  //     this.x <= obj.x + obj.width &&
-  //     this.y + this.offsety + this.height >= obj.y &&
-  //     this.y + this.offsety <= obj.y + obj.height &&
-  //     obj.onCollisionCourse
-  //   ); // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-  // }
+  isColliding(mo) {
+        
+    return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+        this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+        this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+        this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+}
 
   applyGravity() {
     setInterval(() => {
@@ -60,7 +60,11 @@ class MoveableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    return this.y <= 189;
+    if (this instanceof ThorwableObject) {
+      return true;
+    } else {
+      return this.y <= 189;
+    }
   }
 
   playAnimation(images) {

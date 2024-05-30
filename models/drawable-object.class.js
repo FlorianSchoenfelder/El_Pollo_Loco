@@ -29,7 +29,7 @@ class DrawableObject {
   }
 
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken) {
+    if (this instanceof Character || this instanceof Chicken || this instanceof Coin || this instanceof Bottle || this instanceof Endboss) {
       // Zeichnet nur die Rahmen von Charakter oder Chicken
       ctx.beginPath();
       ctx.lineWidth = "3";
@@ -38,4 +38,14 @@ class DrawableObject {
       ctx.stroke();
     }
   }
+
+  drawOffsetFrame(ctx) {
+    if (this instanceof Character || this instanceof Chicken || this instanceof Coin || this instanceof Bottle || this instanceof Endboss) {
+        ctx.beginPath();
+        ctx.lineWidth = '2';
+        ctx.strokeStyle = 'red';
+        ctx.rect(this.x + this.offset.left, this.y + this.offset.top - this.offset.bottom, this.width - this.offset.right, this.height - this.offset.top);
+        ctx.stroke();
+    }
+}
 }

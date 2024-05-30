@@ -9,6 +9,7 @@ class World {
   statusBarCoin = new StatusBarCoin();
   statusBarBottle = new StatusBarBottle();
   statusBarEndboss = new StatusBarEndboss();
+  thorwableObject = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -16,7 +17,7 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.run();
   }
 
   setWorld() {
@@ -34,6 +35,7 @@ class World {
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
+    this.addObjectsToMap(this.thorwableObject);
 
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBarHealth);
@@ -46,15 +48,33 @@ class World {
     });
   }
 
-  checkCollisions() {
+  run() {
     setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.hit();
-          this.statusBarHealth.setPercentages(this.character.energy);
-        }
-      });
+      this.checkcollisions();
+      this.checkThrowObject();
     }, 200);
+  }
+
+  checkThrowObject() {
+    if (this.keyboard.B) {
+      let bottle = new ThorwableObject(this.character.x + 60, this.character.y + 73)
+      this.thorwableObject.push(bottle)
+    }
+  }
+
+  checkcollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        console.log("Collision detected");
+
+        this.character.hit();
+        this.statusBarHealth.setPercentages(this.character.energy);
+      }
+      // if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+      //   // this.enemy.dead();
+      //   console.log("Collision detected");
+      // }
+    });
   }
 
   addObjectsToMap(objects) {
@@ -69,6 +89,7 @@ class World {
     }
     mo.draw(this.ctx); // Bilder allgemein zeichnen
     mo.drawFrame(this.ctx); // Bilderrahmen zeichnen
+    mo.drawOffsetFrame(this.ctx);
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);

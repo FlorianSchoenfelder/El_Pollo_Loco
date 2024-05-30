@@ -3,6 +3,13 @@ class Bottle extends MoveableObject {
     height = 70;
     y = 365;
 
+    offset = {
+        top: 10,
+        left: 20,
+        right: 30,
+        bottom: 0,
+      };
+
     IMAGES_WALKING = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png',

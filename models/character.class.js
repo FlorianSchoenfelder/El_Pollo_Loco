@@ -6,7 +6,17 @@ class Character extends MoveableObject {
   world;
   idleStartTime = null; // Variable to store the time when the condition first becomes true
 
-  walking = new Audio("audio/walking.mp3");
+  walking_sound = new Audio("audio/walking.mp3");
+  snoring_sound = new Audio("audio/snoring.mp3");
+  jumping_sound = new Audio("audio/jump.mp3");
+  hurt_sound = new Audio("audio/hurt.mp3");
+
+  offset = {
+    top: 100,
+    left: 15,
+    right: 30,
+    bottom: 10,
+}
 
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
@@ -14,7 +24,7 @@ class Character extends MoveableObject {
     "img/2_character_pepe/2_walk/W-23.png",
     "img/2_character_pepe/2_walk/W-24.png",
     "img/2_character_pepe/2_walk/W-25.png",
-    "img/2_character_pepe/2_walk/W-26.png"
+    "img/2_character_pepe/2_walk/W-26.png",
   ];
 
   IMAGES_IDLE = [
@@ -27,7 +37,7 @@ class Character extends MoveableObject {
     "img/2_character_pepe/1_idle/idle/I-7.png",
     "img/2_character_pepe/1_idle/idle/I-8.png",
     "img/2_character_pepe/1_idle/idle/I-9.png",
-    "img/2_character_pepe/1_idle/idle/I-10.png"
+    "img/2_character_pepe/1_idle/idle/I-10.png",
   ];
 
   IMAGES_LONG_IDLE = [
@@ -40,7 +50,7 @@ class Character extends MoveableObject {
     "img/2_character_pepe/1_idle/long_idle/I-17.png",
     "img/2_character_pepe/1_idle/long_idle/I-18.png",
     "img/2_character_pepe/1_idle/long_idle/I-19.png",
-    "img/2_character_pepe/1_idle/long_idle/I-20.png"
+    "img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
   IMAGES_JUMPING = [
@@ -52,23 +62,23 @@ class Character extends MoveableObject {
     "img/2_character_pepe/3_jump/J-36.png",
     "img/2_character_pepe/3_jump/J-37.png",
     "img/2_character_pepe/3_jump/J-38.png",
-    "img/2_character_pepe/3_jump/J-39.png"
+    "img/2_character_pepe/3_jump/J-39.png",
   ];
 
   IMAGES_HURT = [
-    'img/2_character_pepe/4_hurt/H-41.png',
-    'img/2_character_pepe/4_hurt/H-42.png',
-    'img/2_character_pepe/4_hurt/H-43.png'
+    "img/2_character_pepe/4_hurt/H-41.png",
+    "img/2_character_pepe/4_hurt/H-42.png",
+    "img/2_character_pepe/4_hurt/H-43.png",
   ];
 
   IMAGES_DEAD = [
-    'img/2_character_pepe/5_dead/D-51.png',
-    'img/2_character_pepe/5_dead/D-52.png',
-    'img/2_character_pepe/5_dead/D-53.png',
-    'img/2_character_pepe/5_dead/D-54.png',
-    'img/2_character_pepe/5_dead/D-55.png',
-    'img/2_character_pepe/5_dead/D-56.png',
-    'img/2_character_pepe/5_dead/D-57.png'
+    "img/2_character_pepe/5_dead/D-51.png",
+    "img/2_character_pepe/5_dead/D-52.png",
+    "img/2_character_pepe/5_dead/D-53.png",
+    "img/2_character_pepe/5_dead/D-54.png",
+    "img/2_character_pepe/5_dead/D-55.png",
+    "img/2_character_pepe/5_dead/D-56.png",
+    "img/2_character_pepe/5_dead/D-57.png",
   ];
 
   constructor() {
@@ -84,52 +94,68 @@ class Character extends MoveableObject {
   }
 
   animate() {
+    //Moving
     setInterval(() => {
-      this.walking.pause();
-      if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) { // Nach rechts laufen und Bild normal
+      this.walking_sound.pause();
+      if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
+        // Nach rechts laufen und Bild normal
         this.moveRight();
         this.otherDirection = false;
-        this.walking.play(); // Sound vom laufen abspielen
+        this.walking_sound.play(); // Sound vom laufen abspielen
+        this.snoring_sound.pause();
       }
-      if (this.world.keyboard.LEFT && this.x > 0) { // Nach links laufen und Character Bild umdrehen
+      if (this.world.keyboard.LEFT && this.x > 0) {
+        // Nach links laufen und Character Bild umdrehen
         this.moveLeft();
         this.otherDirection = true;
-        this.walking.play(); // Sound vom laufen abspielen
+        this.walking_sound.play(); // Sound vom laufen abspielen
+        this.snoring_sound.pause();
       }
-      
+
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
 
+    //Moving Pics
     setInterval(() => {
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT == true) { // Laufanimation der Bilder
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT == true) {
+        // Laufanimation der Bilder
         this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
         this.playAnimation(this.IMAGES_WALKING);
       }
     }, 100);
 
+    // Jumping
     setInterval(() => {
-      if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround() ) { // Veränderung des SpeedY bei Jump taste drücken
+      if (
+        (this.world.keyboard.UP && !this.isAboveGround()) ||
+        (this.world.keyboard.SPACE && !this.isAboveGround())
+      ) {
+        // Veränderung des SpeedY bei Jump taste drücken
         this.jump();
-        
+        this.jumping_sound.play();
       }
     }, 1000 / 60);
 
-    
-
-
+    // Jumping Pics
     setInterval(() => {
-      if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-      }else
-      if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
-      }else
-      if (this.isAboveGround()) { // Check wenn Charakter in Luft ist, dann Animation abspielen
+      if (this.isAboveGround()) {
+        // Check wenn Charakter in Luft ist, dann Animation abspielen
         this.playAnimation(this.IMAGES_JUMPING);
         this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
       }
-    }, 100);
+    }, 190);
 
+    // Hurt or Death
+    setInterval(() => {
+      if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT);
+        this.hurt_sound.play();
+      } else if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD);
+      }
+    }, 200);
+
+    //Idle or Sleeping
     setInterval(() => {
       // Interval for idling or long idling
       const now = Date.now();
@@ -144,9 +170,10 @@ class Character extends MoveableObject {
         // Check how long the condition has been met
         const idleDuration = now - this.idleStartTime;
 
-        if (idleDuration >= 10000) {
+        if (idleDuration >= 1000000) {
           // 10 deconds
           this.playAnimation(this.IMAGES_LONG_IDLE);
+          this.snoring_sound.play();
         } else {
           this.playAnimation(this.IMAGES_IDLE);
         }
@@ -156,5 +183,4 @@ class Character extends MoveableObject {
       }
     }, 250);
   }
-
 }

@@ -36,7 +36,7 @@ window.addEventListener("keydown", (e) => {
         break;
         case 66:
             // console.log("B key");
-            keyboard.LETTER = true;
+            keyboard.B = true;
         break;
         case 32:
             // console.log("Space key");
@@ -70,7 +70,7 @@ window.addEventListener("keydown", (e) => {
             break;
             case 66:
                 // console.log("B key");
-                keyboard.LETTER = false;
+                keyboard.B = false;
             break;
             case 32:
                 // console.log("Space key");
