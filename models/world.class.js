@@ -51,31 +51,71 @@ class World {
   run() {
     setInterval(() => {
       this.checkcollisions();
+      this.checkcollisionsFromTop();
+      this.checkCollactableCoin();
+      this.checkCollactableBottle();
       this.checkThrowObject();
-    }, 200);
+    }, 50);
   }
 
   checkThrowObject() {
-    if (this.keyboard.B) {
-      let bottle = new ThorwableObject(this.character.x + 60, this.character.y + 73)
-      this.thorwableObject.push(bottle)
+    if (this.keyboard.B && this.thorwableObject.length >= 0) {
+      let bottle = new ThorwableObject(this.character.x + 60, this.character.y + 73);
+      this.thorwableObject.splice(1, 0);
+      this.character.removeBottle();
+      this.statusBarBottle.setPercentages(this.character.bottles);
     }
   }
 
   checkcollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        console.log("Collision detected");
-
+      if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
+        // console.log("Collision detected");
         this.character.hit();
         this.statusBarHealth.setPercentages(this.character.energy);
       }
-      // if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
-      //   // this.enemy.dead();
-      //   console.log("Collision detected");
-      // }
     });
   }
+
+  checkcollisionsFromTop() {
+    this.level.enemies.forEach((enemy, index) => {
+      if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+        enemy.chickenDead();
+        this.character.jump();
+        setTimeout(() => {
+          this.level.enemies.splice(index, 1);
+        }, 600);      
+      }
+    });
+  }
+
+  checkCollactableCoin() {
+    this.level.coins.forEach((coin, index) => {
+      if (this.character.isColliding(coin)) {
+        coin.collectCoinSound();
+        this.character.collectCoin();
+        this.statusBarCoin.setPercentages(this.character.coins);
+        setTimeout(() => {
+          this.level.coins.splice(index, 1);
+        }, 10);
+      }
+    });
+  }
+
+  checkCollactableBottle() {
+    this.level.bottles.forEach((bottle, index) => {
+      if (this.character.isColliding(bottle)) {
+        this.character.collectBottle();
+        this.statusBarBottle.setPercentages(this.character.bottles);
+        this.thorwableObject.push(bottle);
+        setTimeout(() => {
+          this.level.bottles.splice(index, 1);
+        }, 50);
+      }
+    });
+  }
+  
+  
 
   addObjectsToMap(objects) {
     objects.forEach((o) => {

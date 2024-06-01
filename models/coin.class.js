@@ -1,6 +1,8 @@
 class Coin extends MoveableObject {
   // y = 355;
 
+  coinCollecting_sound = new Audio("audio/coinCollected.mp3");
+
   offset = {
     top: 70,
     left: 20,
@@ -27,5 +29,10 @@ class Coin extends MoveableObject {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 750);
+  }
+
+  collectCoinSound() {
+    this.coinCollecting_sound.play();
+    
   }
 }

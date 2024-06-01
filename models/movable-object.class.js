@@ -4,6 +4,8 @@ class MoveableObject extends DrawableObject {
   acceleration = 1;
   otherDirection = false;
   energy = 100;
+  coins = 0;
+  bottles = 0;
 
   lastHit = 0;
 
@@ -14,17 +16,22 @@ class MoveableObject extends DrawableObject {
     bottom: 0,
   };
 
-  // isColliding(mo) {
-  //   return (
-  //     this.x + this.width > mo.x &&
-  //     this.y + this.height > mo.y &&
-  //     this.x < mo.x +mo.width &&
-  //     this.y < mo.y + mo.height
-  //   );
-  // }
+  collectCoin() {
+    this.coins += 20;
+    console.log(this.coins,"Coins");
+  }
+
+  collectBottle() {
+    this.bottles += 20;
+    console.log(this.bottles, 'Bottles');
+  }
+
+  removeBottle() {
+    this.bottles -= 20;
+  }
 
   hit() {
-    this.energy -= 5;
+    this.energy -= 1;
     if (this.energy <= 0) {
       this.energy = 0;
     } else {
@@ -39,16 +46,17 @@ class MoveableObject extends DrawableObject {
   }
 
   isDead() {
-    return this.energy == 0;
+    return this.energy == 5;
   }
 
   isColliding(mo) {
-        
-    return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-        this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-        this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-        this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
-}
+    return (
+      this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+      this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+      this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+      this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
+    );
+  }
 
   applyGravity() {
     setInterval(() => {
