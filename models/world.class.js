@@ -59,13 +59,19 @@ class World {
   }
 
   checkThrowObject() {
-    if (this.keyboard.B && this.thorwableObject.length >= 0) {
+    if (this.statusBarBottle.percentage >= 19) {
+      if (this.keyboard.B) {
       let bottle = new ThorwableObject(this.character.x + 60, this.character.y + 73);
-      this.thorwableObject.splice(1, 0);
+      this.thorwableObject.push(bottle);
+      let statusbar = this.statusBarBottle.percentage;
+      statusbar -= 20;
+      this.statusBarBottle.setPercentages(statusbar);
       this.character.removeBottle();
-      this.statusBarBottle.setPercentages(this.character.bottles);
+      }
     }
+    
   }
+
 
   checkcollisions() {
     this.level.enemies.forEach((enemy) => {
@@ -104,13 +110,14 @@ class World {
 
   checkCollactableBottle() {
     this.level.bottles.forEach((bottle, index) => {
+      // debugger
       if (this.character.isColliding(bottle)) {
+        bottle.collectBottleSound();
         this.character.collectBottle();
         this.statusBarBottle.setPercentages(this.character.bottles);
-        this.thorwableObject.push(bottle);
         setTimeout(() => {
           this.level.bottles.splice(index, 1);
-        }, 50);
+        }, 10);
       }
     });
   }
