@@ -1,4 +1,11 @@
 class ThorwableObject extends MoveableObject {
+
+
+  throwingInterval;
+
+  cracking_sound = new Audio('audio/bottleCracked.mp3');
+
+
   IMAGES_SPLASH = [
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
@@ -20,10 +27,20 @@ class ThorwableObject extends MoveableObject {
   throw() {
     this.speedY = 16;
     this.applyGravity();
-    setInterval(() => {
+    this.throwingInterval = setInterval(() => {
       this.x += 18;
-      
     }, 25);
+  }
+
+  splash() {
+      if (this.y == 365) {
+      this.playAnimation(this.IMAGES_SPLASH);
+      this.cracking_sound.play();
+      console.log(this.y);
+      setTimeout(() => {
+        world.thorwableObject.splice(0, 1);
+      }, 500);
+    }    
   }
 
   

@@ -55,6 +55,7 @@ class World {
       this.checkCollactableCoin();
       this.checkCollactableBottle();
       this.checkThrowObject();
+      // this.checkcollisionWithEndboss();
     }, 50);
   }
 
@@ -120,6 +121,12 @@ class World {
         }, 10);
       }
     });
+  }
+
+  checkcollisionWithEndboss() {
+    if (world.thorwableObject.isColliding()) {
+      
+    }
   }
   
   

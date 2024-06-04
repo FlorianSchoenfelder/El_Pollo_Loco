@@ -9,6 +9,9 @@ class MoveableObject extends DrawableObject {
 
   lastHit = 0;
 
+  applyGravityInterval;
+
+
   offset = {
     top: 0,
     left: 0,
@@ -59,13 +62,27 @@ class MoveableObject extends DrawableObject {
   }
 
   applyGravity() {
-    setInterval(() => {
+    this.applyGravityInterval = setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
+        this.releaseGravity();
       }
-    }, 1000 / 60);
+    }, 1000 / 60 );
   }
+
+  releaseGravity() {
+      if (this instanceof ThorwableObject) {
+        if (this.y >= 360) {
+          this.y = 365;
+          this.speedY = 0;
+          clearInterval(this.throwingInterval);
+          clearInterval(this.applyGravityInterval);
+          this.splash();
+        }
+      }
+    }
+ 
 
   isAboveGround() {
     if (this instanceof ThorwableObject) {
