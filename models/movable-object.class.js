@@ -4,6 +4,7 @@ class MoveableObject extends DrawableObject {
   acceleration = 1;
   otherDirection = false;
   energy = 100;
+  endbossEnergy = 100;
   coins = 0;
   bottles = 0;
 
@@ -33,19 +34,28 @@ class MoveableObject extends DrawableObject {
     this.bottles -= 20;
   }
 
-  hit() {
-    this.energy -= 1;
-    if (this.energy <= 0) {
-      this.energy = 0;
-    } else {
-      this.lastHit = new Date().getTime();
+  hit(identification) {
+    if (identification == 'endboss') {
+      this.endbossEnergy -= 1;
+      if (this.endbossEnergy <= 0) {
+        this.endbossEnergy = 0;
+      } else {
+        this.lastHit = new Date().getTime();
+      }
+    } else if (identification == 'character') {
+      this.energy -= 1;
+        if (this.energy <= 0) {
+          this.energy = 0;
+        } else {
+          this.lastHit = new Date().getTime();
+        }
     }
   }
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000;
-    return timepassed < 0.75;
+    return timepassed < 1;
   }
 
   isDead() {

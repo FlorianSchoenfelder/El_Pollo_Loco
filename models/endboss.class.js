@@ -47,7 +47,16 @@ class Endboss extends MoveableObject {
     this.x = 2600;
     this.animateAlert();
     this.checkCharacterPositionToWalk();
+    // this.animate();
   }
+
+  // animate() {
+  //   setInterval(() => {
+  //     if (this.isHurt()) {
+  //       this.endbossHurt();
+  //     }
+  //   }, 500);
+  // }
 
   animateAlert() {
     this.angryBossInterval = setInterval(() => {
@@ -58,7 +67,7 @@ class Endboss extends MoveableObject {
   animateWalking() {
     this.walkingImagesInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
-    }, 200);
+    }, 400);
   }
 
   checkCharacterPositionToWalk() {
@@ -80,6 +89,6 @@ class Endboss extends MoveableObject {
     this.playAnimation(this.IMAGES_HURT);
     setTimeout(() => {
       clearInterval(this.endbossHurtInterval);
-    }, 1500);
+    }, 2000);
   }
 }

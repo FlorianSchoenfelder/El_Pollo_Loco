@@ -79,7 +79,7 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
         // console.log("Collision detected");
-        this.character.hit();
+        this.character.hit('character');
         this.statusBarHealth.setPercentages(this.character.energy);
       }
     });
@@ -128,7 +128,10 @@ class World {
     this.throwableObject.forEach((bottle) => {
       if (bottle.isColliding(this.level.endboss[0])) {
         bottle.splash();
-        this.level.endboss[0].endbossHurt();
+        this.level.endboss[0].hit('endboss');
+        this.level.endboss[0].endbossHurt('endboss');
+        this.statusBarEndboss.setPercentages(this.endbossEnergy);
+
       }
     });
   }
