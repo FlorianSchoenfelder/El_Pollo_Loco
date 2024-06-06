@@ -1,10 +1,8 @@
-class ThorwableObject extends MoveableObject {
+class ThrowableObject extends MoveableObject {
+  throwableObject;
+  releaseGravityIntrerval;
 
-
-  throwingInterval;
-
-  cracking_sound = new Audio('audio/bottleCracked.mp3');
-
+  cracking_sound = new Audio("audio/bottleCracked.mp3");
 
   IMAGES_SPLASH = [
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
@@ -27,21 +25,39 @@ class ThorwableObject extends MoveableObject {
   throw() {
     this.speedY = 16;
     this.applyGravity();
-    this.throwingInterval = setInterval(() => {
+    this.throwableObject = setInterval(() => {
       this.x += 18;
     }, 25);
+    this.releaseGravity();
   }
+
+  releaseGravity() {
+    this.releaseGravityIntrerval = setInterval(() => {
+      if (this.y >= 360) {
+        this.y = 365;
+        this.speedY = 0;
+        this.splash();
+      }
+    }, 100);
+  }
+
+  //   checkThrowingDirection() {
+  //     if (world.character.otherDirection === false) {
+  //         this.x += 18;
+  //     } else {
+  //         this.x -= 18;
+  //     }
+  // }
 
   splash() {
-      if (this.y == 365) {
-      this.playAnimation(this.IMAGES_SPLASH);
-      this.cracking_sound.play();
-      console.log(this.y);
-      setTimeout(() => {
-        world.thorwableObject.splice(0, 1);
-      }, 500);
-    }    
+    clearInterval(this.releaseGravityIntrerval);
+    clearInterval(this.throwableObject);
+    clearInterval(this.applyGravityInterval);
+    this.playAnimation(this.IMAGES_SPLASH);
+    this.cracking_sound.play();
+    console.log(this.y);
+    setTimeout(() => {
+      world.throwableObject.splice(0, 1);
+    }, 350);
   }
-
-  
 }

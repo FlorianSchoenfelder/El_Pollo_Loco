@@ -1,7 +1,17 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let hover_sound = new Audio('audio/hoverButtons.mp3');
+let click_sound = new Audio('audio/click.mp3');
 
+
+function startGame() {
+    click_sound.play();
+    initLevel();
+    init();
+    showCanvas();
+    
+}
 
 function init() {
   canvas = document.getElementById("canvas");
@@ -10,6 +20,31 @@ function init() {
   console.log("My Character is", world.character);
 }
 
+function showCanvas() {
+    document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('startscreen').classList.add('d-none');
+}
+
+function playHoverEffect() {
+    hover_sound.play();
+}
+
+function stopHoverEffect() {
+    hover_sound.pause();
+}
+
+function showControls() {
+    click_sound.play();
+    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('controlsscreen').classList.remove('d-none');
+
+}
+
+function backToStartscreen() {
+    click_sound.play();
+    document.getElementById('startscreen').classList.remove('d-none');
+    document.getElementById('controlsscreen').classList.add('d-none');
+}
 
 
 window.addEventListener("keydown", (e) => {

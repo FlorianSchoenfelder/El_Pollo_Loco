@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EL-Pollo-Loco</title>
     <link rel="stylesheet" href="style.css">
+    <script src="models/world.class.js"></script>
 
     <script src="models/drawable-object.class.js"></script>
 
     <script src="models/movable-object.class.js"></script>
-    <script src="models/world.class.js"></script>
 
     <script src="models/keyboard.class.js"></script>
 
@@ -30,15 +31,57 @@
     <script src="levels/level1.js"></script>
 
     <script src="JavaScript/game.js"></script>
-    
+
 </head>
-<body onload="init()">
+
+<body>
     <h1>Willkommen zu El-Pollo-Loco!</h1>
 
-    <canvas id="canvas" width="720" height="480px">
+    <div class="gameScreen">
+        <canvas id="canvas" class="d-none" width="720" height="480px">
+
+        </canvas>
+    </div>
 
 
-    </canvas>
-    
+    <div id="startscreen" class="startscreen">
+        <div class="buttons">
+            <button onclick="startGame()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()">Play</button>
+            <button onclick="showControls()" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()">Controls</button>
+        </div>
+    </div>
+
+    <div id="controlsscreen" class="controlsscreen d-none">
+        <button id="backButton" class="backButton" onclick="backToStartscreen()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()">x</button>
+        <h2>How to play</h2>
+        <div class="move">
+            <img class="pepeImage" src="img/2_character_pepe/2_walk/W-22.png">
+            <div>
+                <h3>Moving:</h3>
+                <span><b>Left:</b> Keyboard key: <b>A</b> or Arrow key: <b>Left</b> <br>
+                    <b>Right:</b> Keyboard key: <b>D</b> or Arrow key: <b>Right</b> </span>
+            </div>
+        </div>
+        <div class="jump">
+            <img class="pepeImage" src="img/2_character_pepe/3_jump/J-34.png">
+            <div>
+                <h3>Jumping:</h3>
+                <span>Keyboard key: <b>Space</b> or Arrow key: <b>UP</b></span>
+            </div>
+
+        </div>
+        <div class="throw">
+            <img class="bottleImage" src="img/6_salsa_bottle/salsa_bottle.png">
+            <div>
+                <h3>Throw a Bottle:</h3>
+                <span>Keyboard key: <b>B</b></span>
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
+
 </html>

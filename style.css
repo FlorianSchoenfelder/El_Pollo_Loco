@@ -1,9 +1,180 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0;
+  min-height: 100vh;
+  background: url("img/myImages/background.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.d-none {
+  display: none !important;
 }
 
 canvas {
-    background-color: darkblue;
+  display: block;
+  border: 2px solid burlywood;
+  border-radius: 16px;
+  box-shadow: 2px 1px 12px 6px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+  color: burlywood;
+  position: absolute;
+  top: 80px;
+}
+
+h2 {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 32px;
+  margin: 0;
+  padding-top: 24px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+span {
+  font-size: 20px;
+}
+
+.startscreen {
+  width: 720px;
+  height: 480px;
+  background: url("img/9_intro_outro_screens/start/startscreen_1.png");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  border: 2px solid burlywood;
+  border-radius: 16px;
+  box-shadow: 2px 1px 12px 6px rgba(0, 0, 0, 0.4);
+}
+
+.controlsscreen {
+  width: 720px;
+  height: 480px;
+  position: relative;
+  border: 2px solid burlywood;
+  border-radius: 16px;
+  box-shadow: 2px 1px 12px 6px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(
+    to bottom,
+    #89C7DD 25%,
+    #ff8235
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.buttons {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  gap: 24px;
+  width: 200px;
+}
+
+.buttons button {
+  background: rgb(255, 201, 29);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 201, 29, 1) 35%,
+    rgba(255, 217, 0, 1) 54%,
+    rgba(255, 162, 0, 1) 95%
+  );
+  border: 1px solid;
+  height: 40px;
+  /* width: 60px; */
+  color: #9a3a17;
+  border-radius: 24px;
+  font-size: 16px;
+}
+
+.buttons button:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+
+.controlsscreen {
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+}
+
+.move,
+.jump,
+.throw {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  gap: 24px;
+  padding-top: 8px;
+}
+
+.jump {
+  margin-right: 45px;
+}
+
+.throw {
+  margin-right: 194px;
+}
+
+.pepeImage {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  scale: 1.4;
+  margin-bottom: 23px;
+}
+
+.bottleImage {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  scale: 1.2;
+  margin-top: 23px;
+}
+
+.backButton {
+  position: absolute;
+  top: 28px;
+  right: 16px;
+  border: 1px solid;
+  height: 24px;
+  width: 24px;
+  /* color: #9a3a17; */
+  border-radius: 24px;
+  font-size: 16px;
+  background: transparent;
+}
+
+.backButton:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+
+@media only screen and (max-width: 720px) {
+  canvas,
+  .startscreen,
+  .controlsscreen {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-height: 480px) {
+  canvas,
+  .startscreen,
+  .controlsscreen {
+    height: 100vh;
+  }
+  h1 {
+    display: none;
+  }
 }

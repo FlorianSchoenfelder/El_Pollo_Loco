@@ -9,7 +9,7 @@ class World {
   statusBarCoin = new StatusBarCoin();
   statusBarBottle = new StatusBarBottle();
   statusBarEndboss = new StatusBarEndboss();
-  thorwableObject = [];
+  throwableObject = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -35,7 +35,8 @@ class World {
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
-    this.addObjectsToMap(this.thorwableObject);
+    this.addObjectsToMap(this.throwableObject);
+    this.addObjectsToMap(this.level.endboss);
 
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBarHealth);
@@ -55,15 +56,15 @@ class World {
       this.checkCollactableCoin();
       this.checkCollactableBottle();
       this.checkThrowObject();
-      // this.checkcollisionWithEndboss();
+      this.checkcollisionWithEndboss();
     }, 50);
   }
 
   checkThrowObject() {
     if (this.statusBarBottle.percentage >= 19) {
       if (this.keyboard.B) {
-      let bottle = new ThorwableObject(this.character.x + 60, this.character.y + 73);
-      this.thorwableObject.push(bottle);
+      let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 73);
+      this.throwableObject.push(bottle);
       let statusbar = this.statusBarBottle.percentage;
       statusbar -= 20;
       this.statusBarBottle.setPercentages(statusbar);
@@ -124,12 +125,13 @@ class World {
   }
 
   checkcollisionWithEndboss() {
-    if (world.thorwableObject.isColliding()) {
-      
-    }
+    this.throwableObject.forEach((bottle) => {
+      if (bottle.isColliding(this.level.endboss[0])) {
+        bottle.splash();
+        this.level.endboss[0].endbossHurt();
+      }
+    });
   }
-  
-  
 
   addObjectsToMap(objects) {
     objects.forEach((o) => {
