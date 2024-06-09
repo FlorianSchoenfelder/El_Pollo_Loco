@@ -33,6 +33,10 @@ body {
   display: none !important;
 }
 
+.no-underline {
+  text-decoration: none !important;
+}
+
 canvas {
   display: block;
   border: 2px solid black;
@@ -42,9 +46,11 @@ canvas {
 
 h1 {
   color: black;
-  position: absolute;
-  top: 170px;
+  position: relative;
+  top: 0;
   font-size: 40px;
+  padding: 0px 16px;
+  text-align: center;
 }
 
 h2 {
@@ -52,7 +58,7 @@ h2 {
   text-decoration: underline;
   font-size: 32px;
   margin: 0;
-  padding-top: 24px;
+  padding: 24px 16px 0px 16px;
 }
 
 h3 {
@@ -61,6 +67,11 @@ h3 {
 
 span {
   font-size: 20px;
+}
+
+#rotateImage {
+  padding-top: 40px;
+  height: 110px;
 }
 
 .startscreen {
@@ -244,6 +255,10 @@ li:nth-child(3) {
   .controlsscreen {
     height: 100vh;
   }
+}
+
+@media only screen and (max-height: 520px) {
+  
   h1 {
     display: none;
   }

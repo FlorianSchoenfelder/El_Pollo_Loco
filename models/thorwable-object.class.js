@@ -41,14 +41,6 @@ class ThrowableObject extends MoveableObject {
     }, 100);
   }
 
-  //   checkThrowingDirection() {
-  //     if (world.character.otherDirection === false) {
-  //         this.x += 18;
-  //     } else {
-  //         this.x -= 18;
-  //     }
-  // }
-
   splash() {
     clearInterval(this.releaseGravityIntrerval);
     clearInterval(this.throwableObject);
@@ -58,6 +50,6 @@ class ThrowableObject extends MoveableObject {
     console.log(this.y);
     setTimeout(() => {
       world.throwableObject.splice(0, 1);
-    }, 350);
+    }, 25);
   }
 }

@@ -69,6 +69,8 @@ class World {
       statusbar -= 20;
       this.statusBarBottle.setPercentages(statusbar);
       this.character.removeBottle();
+      this.character.idleStartTime = null;
+      this.character.snoring_sound.pause();
       }
     }
     
@@ -129,8 +131,9 @@ class World {
       if (bottle.isColliding(this.level.endboss[0])) {
         bottle.splash();
         this.level.endboss[0].hit('endboss');
-        this.level.endboss[0].endbossHurt('endboss');
-        this.statusBarEndboss.setPercentages(this.endbossEnergy);
+        // this.level.endboss[0].endbossHurt('endboss');
+        this.statusBarEndboss.setPercentages(this.level.endboss[0].endbossEnergy);
+        // console.log(this.level.endboss[0].endbossEnergy);
 
       }
     });

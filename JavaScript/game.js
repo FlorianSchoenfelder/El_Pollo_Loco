@@ -4,9 +4,29 @@ let keyboard = new Keyboard();
 let hover_sound = new Audio("audio/hoverButtons.mp3");
 let click_sound = new Audio("audio/click.mp3");
 
+lastEdited = document.getElementById('startscreen');
+
+window.addEventListener('resize', updateScreenWidth);
+  updateScreenWidth(); // Initiale Aktualisierung
+
+function updateScreenWidth() {
+  if (window.innerWidth <= 650) {
+    lastEdited.classList.add('d-none');
+    document.getElementById('rotateHint').classList.remove('d-none');
+    document.getElementById('rotateImage').classList.remove('d-none');
+  }else {
+    lastEdited.classList.remove('d-none');
+    document.getElementById('rotateHint').classList.add('d-none');
+    document.getElementById('rotateImage').classList.add('d-none');
+  }
+}
+
 function startGame() {
+  lastEdited = document.getElementById('gamescreen');
   click_sound.play();
   document.getElementById("loadingscreen").classList.remove("d-none");
+  document.getElementById("gamescreen").classList.remove("d-none");
+  document.getElementById("headline").classList.add("d-none");
   document.getElementById("startscreen").classList.add("d-none");
   setTimeout(() => {
     initLevel();
@@ -14,6 +34,8 @@ function startGame() {
   }, 1500);
   setTimeout(() => {
     showCanvas();
+    document.getElementById("headline").classList.remove("d-none");
+
   }, 3500);
 }
 
@@ -40,12 +62,14 @@ function stopHoverEffect() {
 }
 
 function showControls() {
+  lastEdited =   document.getElementById("controlsscreen");
   click_sound.play();
   document.getElementById("startscreen").classList.add("d-none");
   document.getElementById("controlsscreen").classList.remove("d-none");
 }
 
 function backToStartscreen() {
+  lastEdited =   document.getElementById("startscreen");
   click_sound.play();
   document.getElementById("startscreen").classList.remove("d-none");
   document.getElementById("controlsscreen").classList.add("d-none");

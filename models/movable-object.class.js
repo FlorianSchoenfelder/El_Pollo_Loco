@@ -36,7 +36,7 @@ class MoveableObject extends DrawableObject {
 
   hit(identification) {
     if (identification == 'endboss') {
-      this.endbossEnergy -= 1;
+      this.endbossEnergy -= 20;
       if (this.endbossEnergy <= 0) {
         this.endbossEnergy = 0;
       } else {
@@ -60,6 +60,10 @@ class MoveableObject extends DrawableObject {
 
   isDead() {
     return this.energy == 5;
+  }
+
+  isEndbossDead() {
+    return this.endbossEnergy == 0;
   }
 
   isColliding(mo) {

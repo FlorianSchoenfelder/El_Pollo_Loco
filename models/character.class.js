@@ -6,6 +6,9 @@ class Character extends MoveableObject {
   world;
   idleStartTime = null; // Variable to store the time when the condition first becomes true
 
+  idleInterval;
+  animationInterval;
+
   walking_sound = new Audio("audio/walking.mp3");
   snoring_sound = new Audio("audio/snoring.mp3");
   jumping_sound = new Audio("audio/jump.mp3");
@@ -93,6 +96,9 @@ class Character extends MoveableObject {
     this.animate();
   }
 
+ now;
+
+
   animate() {
     //Moving
     setInterval(() => {
@@ -116,71 +122,44 @@ class Character extends MoveableObject {
     }, 1000 / 60);
 
     //Moving Pics
-    setInterval(() => {
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT == true) {
-        // Laufanimation der Bilder
-        this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
-        this.playAnimation(this.IMAGES_WALKING);
-      }
-    }, 100);
+    this.animationInterval = setInterval(() => {
 
-    // Jumping
-    setInterval(() => {
-      if (
-        (this.world.keyboard.UP && !this.isAboveGround()) ||
-        (this.world.keyboard.SPACE && !this.isAboveGround())
-      ) {
-        // Veränderung des SpeedY bei Jump taste drücken
-        this.jump();
-        this.jumping_sound.play();
-      }
-    }, 1000 / 60);
-
-    // Jumping Pics
-    setInterval(() => {
-      if (this.isAboveGround()) {
-        // Check wenn Charakter in Luft ist, dann Animation abspielen
-        this.playAnimation(this.IMAGES_JUMPING);
-        this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
-      }
-    }, 190);
-
-    // Hurt or Death
-    setInterval(() => {
       if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
         this.hurt_sound.play();
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
-      }
-    }, 200);
-
-    //Idle or Sleeping
-    setInterval(() => {
-      // Interval for idling or long idling
-      const now = Date.now();
-
-      // Check if the condition is met
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT == false) {
-        // If this is the first time the condition is met, record the time
+      } else if ( (this.world.keyboard.UP && !this.isAboveGround()) || (this.world.keyboard.SPACE && !this.isAboveGround()) ){
+          // Veränderung des SpeedY bei Jump taste drücken
+          this.jump();
+          this.jumping_sound.play();
+          
+      } else if (this.isAboveGround()) {
+        this.playAnimation(this.IMAGES_JUMPING);
+        this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
+        this.snoring_sound.pause();
+      } else {
+        // this.sidleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
+        this.playAnimation(this.IMAGES_WALKING);
+      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT == false) {
+        this.now = Date.now();
         if (this.idleStartTime === null) {
-          this.idleStartTime = now;
+          this.idleStartTime = this.now;
         }
-
-        // Check how long the condition has been met
-        const idleDuration = now - this.idleStartTime;
-
-        if (idleDuration >= 1000000) {
-          // 10 deconds
+        const idleDuration = this.now - this.idleStartTime;
+        if (idleDuration >= 6000) {
           this.playAnimation(this.IMAGES_LONG_IDLE);
           this.snoring_sound.play();
         } else {
           this.playAnimation(this.IMAGES_IDLE);
         }
-      } else {
-        // Reset the idleStartTime if the condition is not met
-        this.sidleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
       }
-    }, 250);
+    }
+    }, 150);
+
   }
+
+
 }

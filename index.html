@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EL-Pollo-Loco</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/3_enemies_chicken/chicken_normal/1_walk/1_w.png" type="image/x-icon">
     <script src="models/world.class.js"></script>
 
     <script src="models/drawable-object.class.js"></script>
@@ -30,14 +31,16 @@
 
     <script src="levels/level1.js"></script>
 
-    <script src="JavaScript/game.js"></script>
+    <script src="JavaScript/game.js" defer></script>
 
 </head>
 
-<body>
-    <h1>Willkommen zu El-Pollo-Loco!</h1>
+<body id="body">
+    <h1 id="headline">Welcome to El-Pollo-Loco!</h1>
+    <h2 id="rotateHint" class="d-none no-underline">To play, please rotate your device!</h2>
+    <img src="img/myImages/rotate.png" id="rotateImage" class="d-none">
 
-    <div class="gameScreen">
+    <div id="gamescreen" class="gameScreen d-none">
         <canvas id="canvas" class="d-none" width="720" height="480px">
 
         </canvas>
