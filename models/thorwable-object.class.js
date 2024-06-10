@@ -46,7 +46,9 @@ class ThrowableObject extends MoveableObject {
     clearInterval(this.throwableObject);
     clearInterval(this.applyGravityInterval);
     this.playAnimation(this.IMAGES_SPLASH);
-    this.cracking_sound.play();
+    if (!muted) {
+    this.cracking_sound.play();      
+    }
     console.log(this.y);
     setTimeout(() => {
       world.throwableObject.splice(0, 1);

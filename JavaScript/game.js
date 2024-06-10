@@ -3,6 +3,12 @@ let world;
 let keyboard = new Keyboard();
 let hover_sound = new Audio("audio/hoverButtons.mp3");
 let click_sound = new Audio("audio/click.mp3");
+let background_sound = new Audio('audio/background.mp3');
+let winning_sound = new Audio('audio/winning.mp3');
+let loosing_sound = new Audio('audio/loosing.mp3');
+let muted = false;
+let winningSoundWasPlayed = false;
+let loosingSoundWasPlayed = false;
 
 lastEdited = document.getElementById('startscreen');
 
@@ -35,9 +41,11 @@ function startGame() {
   setTimeout(() => {
     showCanvas();
     document.getElementById("headline").classList.remove("d-none");
-
+    document.getElementById("soundControl").classList.remove("d-none");
   }, 3500);
 }
+
+
 
 function init() {
   canvas = document.getElementById("canvas");
@@ -73,6 +81,57 @@ function backToStartscreen() {
   click_sound.play();
   document.getElementById("startscreen").classList.remove("d-none");
   document.getElementById("controlsscreen").classList.add("d-none");
+}
+
+function playEndScreen() {
+  console.log('You WON');
+  document.getElementById("gamescreen").classList.add("d-none");
+  document.getElementById('winningscreen').classList.remove('d-none');
+  document.getElementById('wonImg').classList.add('animateImg');
+  muted = true;
+  setTimeout(() => {
+    if (!winningSoundWasPlayed) {
+      winning_sound.play();
+      winningSoundWasPlayed = true;
+    }
+  }, 200);
+  
+}
+
+function playGameOverScreen() {
+  console.log('You LOOSE');
+  document.getElementById("gamescreen").classList.add("d-none");
+  document.getElementById('loosingscreen').classList.remove('d-none');
+  document.getElementById('looseImg').classList.add('animateImg');
+  muted = true;
+  setTimeout(() => {
+    if (!loosingSoundWasPlayed) {
+      loosing_sound.play();
+      loosingSoundWasPlayed = true;
+    }
+  }, 200);
+}
+
+function backToStartscreen() {
+  click_sound.play();
+  setTimeout(() => {
+    location.reload();
+  }, 200);
+  
+}
+
+function muteSound() {
+  muted = true;
+  click_sound.play();
+  document.getElementById('soundOnImg').classList.add('d-none');
+  document.getElementById('soundOffImg').classList.remove('d-none');
+}
+
+function unmuteSound() {
+  muted = false;
+  click_sound.play();
+  document.getElementById('soundOnImg').classList.remove('d-none');
+  document.getElementById('soundOffImg').classList.add('d-none');
 }
 
 window.addEventListener("keydown", (e) => {

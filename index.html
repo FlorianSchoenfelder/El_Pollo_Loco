@@ -42,9 +42,15 @@
 
     <div id="gamescreen" class="gameScreen d-none">
         <canvas id="canvas" class="d-none" width="720" height="480px">
-
+            
         </canvas>
+        <div id="soundControl" class="soundControl d-none">
+            <img  id="soundOnImg" onclick="muteSound()"  src="img/myImages/soundOn.png">
+            <img id="soundOffImg" class="d-none" onclick="unmuteSound()" src="img/myImages/soundOff.png">
+        </div>
     </div>
+
+    
 
 
     <div id="startscreen" class="startscreen">
@@ -53,6 +59,7 @@
             <button onclick="showControls()" onmouseover="playHoverEffect()"
                 onmouseleave="stopHoverEffect()">Controls</button>
         </div>
+        
     </div>
 
     <div id="controlsscreen" class="controlsscreen d-none">
@@ -92,6 +99,18 @@
                 <li class="dot"></li>
             </ul>
         </div>
+    </div>
+
+    <div id="winningscreen" class="winningscreen d-none">
+        <img id="wonImg" class="wonImg" src="img/9_intro_outro_screens/win/won_2.png">
+    </div>
+
+    <div id="loosingscreen" class="loosingscreen d-none">
+        <div class="backToStartscreen" onclick="backToStartscreen()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()">
+            <img class="restartImg" src="img/myImages/restart.png">
+            <p>Home</p>
+        </div>
+        <img id="looseImg" class="looseImg" src="img/9_intro_outro_screens/game_over/game over.png">
     </div>
 
 

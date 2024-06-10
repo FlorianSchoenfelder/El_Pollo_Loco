@@ -5,6 +5,7 @@ class Character extends MoveableObject {
   speed = 6;
   world;
   idleStartTime = null; // Variable to store the time when the condition first becomes true
+  deadAnimationPlayed = false;
 
   idleInterval;
   animationInterval;
@@ -74,7 +75,7 @@ class Character extends MoveableObject {
     "img/2_character_pepe/4_hurt/H-43.png",
   ];
 
-  IMAGES_DEAD = [
+  IMAGES_DEAD_ANIMATION = [
     "img/2_character_pepe/5_dead/D-51.png",
     "img/2_character_pepe/5_dead/D-52.png",
     "img/2_character_pepe/5_dead/D-53.png",
@@ -84,6 +85,10 @@ class Character extends MoveableObject {
     "img/2_character_pepe/5_dead/D-57.png",
   ];
 
+  IMAGES_DEAD_LAST =[
+    "img/2_character_pepe/5_dead/D-57.png"
+  ]
+
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -91,7 +96,8 @@ class Character extends MoveableObject {
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_HURT);
-    this.loadImages(this.IMAGES_DEAD);
+    this.loadImages(this.IMAGES_DEAD_ANIMATION);
+    this.loadImages(this.IMAGES_DEAD_LAST);
     this.applyGravity();
     this.animate();
   }
@@ -107,14 +113,19 @@ class Character extends MoveableObject {
         // Nach rechts laufen und Bild normal
         this.moveRight();
         this.otherDirection = false;
-        this.walking_sound.play(); // Sound vom laufen abspielen
+        
+        if (!muted) {
+          this.walking_sound.play(); // Sound vom laufen abspielen
+        }
         this.snoring_sound.pause();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         // Nach links laufen und Character Bild umdrehen
         this.moveLeft();
         this.otherDirection = true;
-        this.walking_sound.play(); // Sound vom laufen abspielen
+        if (!muted) {
+          this.walking_sound.play(); // Sound vom laufen abspielen
+        }
         this.snoring_sound.pause();
       }
 
@@ -126,13 +137,19 @@ class Character extends MoveableObject {
 
       if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
-        this.hurt_sound.play();
+        if (!muted) {
+          this.hurt_sound.play();
+        }
+        
       } else if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
+        this.playDeadSequence();
       } else if ( (this.world.keyboard.UP && !this.isAboveGround()) || (this.world.keyboard.SPACE && !this.isAboveGround()) ){
           // Veränderung des SpeedY bei Jump taste drücken
           this.jump();
-          this.jumping_sound.play();
+          if (!muted) {
+            this.jumping_sound.play();
+          }
+          
           
       } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
@@ -151,7 +168,10 @@ class Character extends MoveableObject {
         const idleDuration = this.now - this.idleStartTime;
         if (idleDuration >= 6000) {
           this.playAnimation(this.IMAGES_LONG_IDLE);
-          this.snoring_sound.play();
+          if (!muted) {
+            this.snoring_sound.play();
+          }
+          
         } else {
           this.playAnimation(this.IMAGES_IDLE);
         }
@@ -159,6 +179,18 @@ class Character extends MoveableObject {
     }
     }, 150);
 
+  }
+
+  playDeadSequence() {
+    if (!this.deadAnimationPlayed) {
+      this.playAnimation(this.IMAGES_DEAD_ANIMATION);
+      this.deadAnimationPlayed = true;
+    } else {
+      this.playAnimation(this.IMAGES_DEAD_LAST);
+      setTimeout(() => {
+        playGameOverScreen();
+      }, 1000);
+    }
   }
 
 

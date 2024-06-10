@@ -33,6 +33,8 @@ class Bottle extends MoveableObject {
         }
 
         collectBottleSound() {
-            this.bottleCollecting_sound.play();
+            if (!muted) {
+                this.bottleCollecting_sound.play();                
+            }
           }
 }

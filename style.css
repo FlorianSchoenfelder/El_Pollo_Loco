@@ -7,6 +7,7 @@
     box-sizing: border-box;
     font-family: 'zabars', Arial, Helvetica, sans-serif;
     margin: 0;
+    
 }
 
 html {
@@ -27,6 +28,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   letter-spacing: 3px;
+  overflow: hidden;
 }
 
 .d-none {
@@ -74,6 +76,21 @@ span {
   height: 110px;
 }
 
+#soundOnImg:hover, #soundOffImg:hover {
+  cursor: pointer;
+}
+
+#soundOnImg, #soundOffImg {
+  width: 40px;
+}
+
+.soundControl {
+  position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
 .startscreen {
   width: 720px;
   height: 480px;
@@ -90,7 +107,7 @@ span {
   width: 720px;
   height: 480px;
   position: relative;
-  border: 2px solid black;
+  border: 3px solid black;
   border-radius: 16px;
   box-shadow: 2px 1px 12px 6px rgba(0, 0, 0, 0.4);
   background: linear-gradient(
@@ -98,6 +115,61 @@ span {
     #e95115 45%,
     #A2480C 75%
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.gameScreen {
+  position: relative;
+}
+
+.winningscreen, .loosingscreen{
+  width: 720px;
+  height: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 3px solid black;
+  border-radius: 16px;
+  box-shadow: 2px 1px 12px 6px rgba(0, 0, 0, 0.4);
+  background-color: rgba(221, 160, 81, 0.863);
+
+}
+
+.loosingscreen {
+  overflow: hidden;
+}
+
+.backToStartscreen {
+  position: absolute;
+    top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1;
+}
+
+.backToStartscreen p {
+  font-size: 27px;
+}
+
+.backToStartscreen:hover {
+  cursor: pointer;
+  text-shadow: 2px 1px 8px black;
+  scale: 1.1;
+}
+
+.restartImg {
+  height: 40px;
+}
+
+.wonImg, .looseImg {
+  height: 0;
+  width: 0;
+  border-radius: 13px;
+}
+
+.animateImg {
+  animation: expand 3s forwards;
 }
 
 .buttons {
@@ -238,6 +310,24 @@ li:nth-child(3) {
 
 @keyframes scale {
     25% {scale: 1.5;}
+}
+
+@keyframes expand {
+  0% {
+      width: 0;
+      height: 0;
+      transform: scale(1);
+  }
+  50% {
+      width: 110%;
+      height: 100%;
+      transform: scale(1.1);
+  }
+  100% {
+      width: 100%;
+      height: 100%;
+      transform: scale(1);
+  }
 }
 
 @media only screen and (max-width: 720px) {

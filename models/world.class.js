@@ -57,6 +57,8 @@ class World {
       this.checkCollactableBottle();
       this.checkThrowObject();
       this.checkcollisionWithEndboss();
+      this.muteAll();
+      this.unmuteAll();
     }, 50);
   }
 
@@ -131,12 +133,30 @@ class World {
       if (bottle.isColliding(this.level.endboss[0])) {
         bottle.splash();
         this.level.endboss[0].hit('endboss');
-        // this.level.endboss[0].endbossHurt('endboss');
         this.statusBarEndboss.setPercentages(this.level.endboss[0].endbossEnergy);
-        // console.log(this.level.endboss[0].endbossEnergy);
 
       }
     });
+  }
+
+  muteAll() {
+    setInterval(() => {
+      if (muted == true) {
+      this.character.snoring_sound.pause();
+      background_sound.pause();
+      background_sound.currentTime = 0;
+      this.character.snoring_sound.currentTime = 0;
+    }
+    }, 500); 
+  }
+
+  unmuteAll() {
+    setInterval(() => {
+      if (muted == false && lastEdited == document.getElementById('gamescreen')) {
+        background_sound.play();
+        background_sound.volume = 0.4;
+      }
+    }, 1800);
   }
 
   addObjectsToMap(objects) {

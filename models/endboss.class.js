@@ -8,6 +8,7 @@ class Endboss extends MoveableObject {
   walkingInterval;
   checkforCharacterPositionIntertval;
   deadAnimationPlayed = false;
+  endbossDetectedPepe = false;
 
   offset = {
     top: 10,
@@ -67,6 +68,8 @@ class Endboss extends MoveableObject {
         this.endbossDead();
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
+      } else if (world && world.character.x > 2012 || this.endbossDetectedPepe == true) {
+        this.endbossWalk(); 
       } else {
         this.playAnimation(this.IMAGES_ALERT);
       }
@@ -79,9 +82,9 @@ class Endboss extends MoveableObject {
       this.deadAnimationPlayed = true;
     } else {
       this.playAnimation(this.IMAGES_DEAD_LAST);
-      // setTimeout(() => {
-      //   playEndScreen();
-      // }, 1000);
+      setTimeout(() => {
+        playEndScreen();
+      }, 1000);
     }
     
   }
@@ -106,12 +109,13 @@ class Endboss extends MoveableObject {
   //   }, 100);
   // }
 
-  // walk() {
-  //   clearInterval(this.angryBossInterval);
-  //   this.moveLeft();
-  //   this.animateWalking();
+  endbossWalk() {
+    this.endbossDetectedPepe = true;
+    clearInterval(this.angryBossInterval);
+    this.moveLeft();
+    this.animateWalking();
 
-  // }
+  }
 
   // endbossHurt() {
   //   this.playAnimation(this.IMAGES_HURT);

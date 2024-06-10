@@ -59,7 +59,7 @@ class MoveableObject extends DrawableObject {
   }
 
   isDead() {
-    return this.energy == 5;
+    return this.energy == 0;
   }
 
   isEndbossDead() {
