@@ -110,8 +110,7 @@ class Character extends MoveableObject {
     setInterval(() => {
       this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
-        // Nach rechts laufen und Bild normal
-        this.moveRight();
+        this.moveRight(); // Nach rechts laufen und Bild normal
         this.otherDirection = false;
         
         if (!muted) {
@@ -120,13 +119,18 @@ class Character extends MoveableObject {
         this.snoring_sound.pause();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
-        // Nach links laufen und Character Bild umdrehen
-        this.moveLeft();
+        this.moveLeft(); // Nach links laufen und Bild gedreht
         this.otherDirection = true;
         if (!muted) {
           this.walking_sound.play(); // Sound vom laufen abspielen
         }
         this.snoring_sound.pause();
+      }
+      if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
+        this.jump();
+        if (!muted) {
+          this.jumping_sound.play();
+        } 
       }
 
       this.world.camera_x = -this.x + 100;
@@ -139,25 +143,19 @@ class Character extends MoveableObject {
         this.playAnimation(this.IMAGES_HURT);
         if (!muted) {
           this.hurt_sound.play();
-        }
-        
+        } 
       } else if (this.isDead()) {
         this.playDeadSequence();
       } else if ( (this.world.keyboard.UP && !this.isAboveGround()) || (this.world.keyboard.SPACE && !this.isAboveGround()) ){
-          // Veränderung des SpeedY bei Jump taste drücken
           this.jump();
           if (!muted) {
             this.jumping_sound.play();
-          }
-          
-          
+          } 
       } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
         this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
         this.snoring_sound.pause();
-      } else {
-        // this.sidleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
         this.playAnimation(this.IMAGES_WALKING);
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT == false) {
@@ -170,13 +168,11 @@ class Character extends MoveableObject {
           this.playAnimation(this.IMAGES_LONG_IDLE);
           if (!muted) {
             this.snoring_sound.play();
-          }
-          
+          }         
         } else {
           this.playAnimation(this.IMAGES_IDLE);
         }
       }
-    }
     }, 150);
 
   }

@@ -48,6 +48,17 @@
             <img  id="soundOnImg" onclick="muteSound()"  src="img/myImages/soundOn.png">
             <img id="soundOffImg" class="d-none" onclick="unmuteSound()" src="img/myImages/soundOff.png">
         </div>
+
+        <div id="controlsForMobile" class="d-none">
+            <div class="moving">
+                <svg id="btnLeft" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFD43B" d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg>
+                <svg id="btnRight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFD43B" d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM281 385c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l71-71L136 280c-13.3 0-24-10.7-24-24s10.7-24 24-24l182.1 0-71-71c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L393 239c9.4 9.4 9.4 24.6 0 33.9L281 385z"/></svg>
+            </div>
+            <div class="jumpingAndThrow">
+                <svg id="jump" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#FFD43B" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM385 231c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-71-71V376c0 13.3-10.7 24-24 24s-24-10.7-24-24V193.9l-71 71c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 119c9.4-9.4 24.6-9.4 33.9 0L385 231z"/></svg>
+                <img id="bottleThrow" src="img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png">
+            </div>
+        </div>
     </div>
 
     
@@ -108,7 +119,7 @@
     <div id="loosingscreen" class="loosingscreen d-none">
         <div class="backToStartscreen" onclick="backToStartscreen()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()">
             <img class="restartImg" src="img/myImages/restart.png">
-            <p>Home</p>
+            <p>Try Again!</p>
         </div>
         <img id="looseImg" class="looseImg" src="img/9_intro_outro_screens/game_over/game over.png">
     </div>

@@ -21,10 +21,10 @@ body {
   justify-content: center;
   box-sizing: border-box;
   margin: 0;
-  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   background-image: url("img/myImages/background6.jpg");
   background-position: center;
-  background-origin: content-box;
   background-size: cover;
   background-repeat: no-repeat;
   letter-spacing: 3px;
@@ -133,6 +133,38 @@ span {
   box-shadow: 2px 1px 12px 6px rgba(0, 0, 0, 0.4);
   background-color: rgba(221, 160, 81, 0.863);
 
+}
+
+.moving, .jumpingAndThrow {
+  display: flex;
+  gap: 50px;
+}
+
+.moving  > svg{
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.jumpingAndThrow > svg{
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.jumpingAndThrow > img{
+  height: 40px;
+  background-color: #FFD43B;
+  border-radius: 50%;
+}
+
+#controlsForMobile {
+  position: absolute;
+    bottom: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
 }
 
 .loosingscreen {

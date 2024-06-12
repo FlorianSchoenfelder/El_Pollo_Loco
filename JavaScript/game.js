@@ -42,6 +42,7 @@ function startGame() {
     showCanvas();
     document.getElementById("headline").classList.remove("d-none");
     document.getElementById("soundControl").classList.remove("d-none");
+    document.getElementById("controlsForMobile").classList.remove("d-none");   
   }, 3500);
 }
 
@@ -62,6 +63,7 @@ function showCanvas() {
 }
 
 function playHoverEffect() {
+  hover_sound.volume = 0.2;
   hover_sound.play();
 }
 
@@ -84,7 +86,8 @@ function backToStartscreen() {
 }
 
 function playEndScreen() {
-  console.log('You WON');
+  level1;
+  world;
   document.getElementById("gamescreen").classList.add("d-none");
   document.getElementById('winningscreen').classList.remove('d-none');
   document.getElementById('wonImg').classList.add('animateImg');
@@ -92,6 +95,7 @@ function playEndScreen() {
   setTimeout(() => {
     if (!winningSoundWasPlayed) {
       winning_sound.play();
+      winning_sound.volume = 0.5;
       winningSoundWasPlayed = true;
     }
   }, 200);
@@ -99,7 +103,8 @@ function playEndScreen() {
 }
 
 function playGameOverScreen() {
-  console.log('You LOOSE');
+  level1;
+  world;
   document.getElementById("gamescreen").classList.add("d-none");
   document.getElementById('loosingscreen').classList.remove('d-none');
   document.getElementById('looseImg').classList.add('animateImg');
@@ -200,4 +205,36 @@ window.addEventListener("keyup", (e) => {
       break;
   }
   //  console.log(e.keyCode);
+});
+
+document.getElementById('btnLeft').addEventListener('touchstart', () => {
+  keyboard.LEFT = true;
+});
+
+document.getElementById('btnLeft').addEventListener('touchend', () => {
+  keyboard.LEFT = false;
+});
+
+document.getElementById('btnRight').addEventListener('touchstart', () => {
+  keyboard.RIGHT = true;
+});
+
+document.getElementById('btnRight').addEventListener('touchend', () => {
+  keyboard.RIGHT = false;
+});
+
+document.getElementById('jump').addEventListener('touchstart', () => {
+  keyboard.SPACE = true;
+});
+
+document.getElementById('jump').addEventListener('touchend', () => {
+  keyboard.SPACE = false;
+});
+
+document.getElementById('bottleThrow').addEventListener('touchstart', () => {
+  keyboard.B = true;
+});
+
+document.getElementById('bottleThrow').addEventListener('touchend', () => {
+  keyboard.B = false;
 });
