@@ -8,7 +8,6 @@ class Endboss extends MoveableObject {
   walkingInterval;
   checkforCharacterPositionIntertval;
   deadAnimationPlayed = false;
-  // endbossDetectedPepe = false;
   attackAnimationPlayed = false;
 
   offset = {

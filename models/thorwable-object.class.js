@@ -1,7 +1,6 @@
 class ThrowableObject extends MoveableObject {
   throwableObject;
   releaseGravityIntrerval;
-  bottleCracked = false;
 
   cracking_sound = new Audio("audio/bottleCracked.mp3");
 
@@ -33,7 +32,6 @@ class ThrowableObject extends MoveableObject {
   }
 
   throw() {
-    this.bottleCracked = true;
     this.speedY = 16;
     this.applyGravity();
     this.throwableObject = setInterval(() => {
@@ -66,7 +64,9 @@ class ThrowableObject extends MoveableObject {
   }
 
   splash() {
-    this.bottleCracked = false;
+    clearInterval(this.throwableObject);
+
+    this.speedY = 0;
     clearInterval(this.releaseGravityIntrerval);
     clearInterval(this.applyGravityInterval);
     this.playAnimation(this.IMAGES_SPLASH);
@@ -76,6 +76,7 @@ class ThrowableObject extends MoveableObject {
     console.log(this.y);
     setTimeout(() => {
       world.throwableObject.splice(0, 1);
-    }, 25);
+      world.bottleCollisionWithEndboss = false;
+    }, 225);
   }
 }

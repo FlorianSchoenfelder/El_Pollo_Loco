@@ -60,7 +60,7 @@ h2 {
   text-decoration: underline;
   font-size: 32px;
   margin: 0;
-  padding: 24px 16px 0px 16px;
+  /* padding: 24px 16px 0px 16px; */
 }
 
 h3 {
@@ -200,8 +200,12 @@ span {
   border-radius: 13px;
 }
 
-.animateImg {
-  animation: expand 3s forwards;
+.animateImgLoose {
+  animation: expandLoose 3s forwards;
+}
+
+.animateImgWin {
+  animation: expandWin 3s forwards;
 }
 
 .buttons {
@@ -246,20 +250,12 @@ span {
 .throw {
     box-sizing: border-box;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   min-height: 120px;
   width: 100%;
   gap: 24px;
   padding-top: 16px;
-}
-
-.jump {
-  padding-right: 45px;
-}
-
-.throw {
-  padding-right: 225px;
 }
 
 .pepeImage {
@@ -279,12 +275,12 @@ span {
 
 .backButton {
   position: absolute;
-  top: 28px;
   right: 16px;
   border: 1px solid;
   height: 30px;
   border-radius: 24px;
   font-size: 16px;
+  transform: translate(-50%, 0%);
   background: rgb(255, 201, 29);
   background: linear-gradient(
     180deg,
@@ -301,6 +297,7 @@ span {
 
 .inputLoadingscreen {
     display: flex;
+    justify-content: center;
     align-items: center;
     height: 80px;
 }
@@ -344,28 +341,44 @@ li:nth-child(3) {
     25% {scale: 1.5;}
 }
 
-@keyframes expand {
+@keyframes expandLoose {
   0% {
       width: 0;
       height: 0;
-      transform: scale(1);
   }
   50% {
       width: 110%;
       height: 100%;
-      transform: scale(1.1);
   }
   100% {
       width: 100%;
       height: 100%;
-      transform: scale(1);
+  }
+}
+
+@keyframes expandWin {
+  0% {
+      width: 0;
+      height: 0;
+  }
+  50% {
+      width: 100%;
+      height: 70%;
+  }
+  100% {
+      width: 90%;
+      height: 40%;
   }
 }
 
 @media only screen and (max-width: 720px) {
   canvas,
   .startscreen,
-  .controlsscreen {
+  .controlsscreen,
+  .winningscreen,
+  .loosingscreen,
+  .gameScreen,
+  .loadingscreen {
     width: 100%;
   }
 }
@@ -374,7 +387,11 @@ li:nth-child(3) {
   body,
   canvas,
   .startscreen,
-  .controlsscreen {
+  .controlsscreen,
+  .winningscreen,
+  .loosingscreen,
+  .gameScreen,
+  .loadingscreen {
     height: 100vh;
   }
 }
@@ -384,4 +401,42 @@ li:nth-child(3) {
   h1 {
     display: none;
   }
+
+  .content div {
+    min-height: unset;
+    flex-grow: 1;
+    padding: unset !important;
+    /* height: 100px; */
+  }
+
+  .content div img {
+    height: 70px;
+  }
+
+  .pepeImage {
+    margin-top: -13px;
+  }
+
+  .content {
+    padding-bottom: unset !important;
+  }
+
+
+
+}
+
+.headline {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 70px;
+  padding-bottom: 16px;
 }

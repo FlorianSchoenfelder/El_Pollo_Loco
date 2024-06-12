@@ -90,7 +90,7 @@ function playEndScreen() {
   world;
   document.getElementById("gamescreen").classList.add("d-none");
   document.getElementById('winningscreen').classList.remove('d-none');
-  document.getElementById('wonImg').classList.add('animateImg');
+  document.getElementById('wonImg').classList.add('animateImgWin');
   muted = true;
   setTimeout(() => {
     if (!winningSoundWasPlayed) {
@@ -107,7 +107,7 @@ function playGameOverScreen() {
   world;
   document.getElementById("gamescreen").classList.add("d-none");
   document.getElementById('loosingscreen').classList.remove('d-none');
-  document.getElementById('looseImg').classList.add('animateImg');
+  document.getElementById('looseImg').classList.add('animateImgLoose');
   muted = true;
   setTimeout(() => {
     if (!loosingSoundWasPlayed) {

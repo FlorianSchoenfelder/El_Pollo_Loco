@@ -10,6 +10,7 @@ class World {
   statusBarBottle = new StatusBarBottle();
   statusBarEndboss = new StatusBarEndboss();
   throwingButtonPressed = false;
+  pepeJumpedOnChicken = false;
   bottleCollisionWithEndboss = false;
   throwableObject = [];
 
@@ -94,9 +95,10 @@ class World {
   checkcollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
-        // console.log("Collision detected");
+        this.pepeJumpedOnChicken = true;
         this.character.hit('character');
         this.statusBarHealth.setPercentages(this.character.energy);
+          this.pepeJumpedOnChicken = false;
       }
     });
   }
@@ -105,7 +107,10 @@ class World {
     this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 15) {
         enemy.chickenDead();
-          this.level.enemies.splice(index, 1);
+        setTimeout(() => {
+         this.level.enemies.splice(index, 1);
+
+        }, 200);
       }
     });
   }
@@ -138,12 +143,12 @@ class World {
 
   checkBottleCollisionWithEndboss() {
     this.throwableObject.forEach((bottle, index) => {
-      if (bottle.isColliding(this.level.endboss[0])) {
-        bottle.splash();
+      if (bottle.isColliding(this.level.endboss[0]) && !this.bottleCollisionWithEndboss == true ) {
         this.bottleCollisionWithEndboss = true
-        this.level.endboss[0].hit('endboss');
-        this.statusBarEndboss.setPercentages(this.level.endboss[0].endbossEnergy);
-        // this.level.bottles.splice(index, 1);
+          bottle.splash();
+          this.level.endboss[0].hit('endboss');
+          this.statusBarEndboss.setPercentages(this.level.endboss[0].endbossEnergy);
+          this.level.bottles.splice(index, 1);
       }
     });
   }
