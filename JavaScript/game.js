@@ -10,6 +10,7 @@ let muted = false;
 let winningSoundWasPlayed = false;
 let loosingSoundWasPlayed = false;
 
+
 lastEdited = document.getElementById('startscreen');
 
 window.addEventListener('resize', updateScreenWidth);
@@ -27,26 +28,36 @@ function updateScreenWidth() {
   }
 }
 
-// function gamePaused() {
-//   world.gamePaused = true;
-//   world.test = true;
-//   muted = true;
-//   click_sound.play();
-//   document.getElementById('pauseGameImg').classList.add('d-none');
-//   document.getElementById('playGameImg').classList.remove('d-none');
+// function setStopableInterval(fn, time) {
+//   let id = setInterval(fn, time);
+//   intervalIds.push(id);
+
 // }
 
-// function gameContinued() {
-//   world.gamePaused = false;
-//   world.test = false;
-//   muted = false;
-//   click_sound.play();
-//   document.getElementById('pauseGameImg').classList.remove('d-none');
-//   document.getElementById('playGameImg').classList.add('d-none');
-//   setTimeout(() => {
-//     world.test = true;
-//   }, 1500);
-// }
+function gamePaused() {
+  // world.gamePaused = true;
+  // world.test = true;
+  // muted = true;
+  // click_sound.play();
+  // clearAllIntervals();
+  document.getElementById('pauseGameImg').classList.add('d-none');
+  document.getElementById('playGameImg').classList.remove('d-none');
+
+}
+
+function clearAllIntervals() {
+  for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
+function gameContinued() {
+  // world.gamePaused = false;
+  // world.test = false;
+  // muted = false;
+  // click_sound.play();
+  // setStopableInterval();
+  document.getElementById('pauseGameImg').classList.remove('d-none');
+  document.getElementById('playGameImg').classList.add('d-none');
+}
 
 function startGame() {
   lastEdited = document.getElementById('gamescreen');
@@ -158,6 +169,20 @@ function unmuteSound() {
   click_sound.play();
   document.getElementById('soundOnImg').classList.remove('d-none');
   document.getElementById('soundOffImg').classList.add('d-none');
+}
+
+function openImprint() {
+  lastEdited = document.getElementById('imprintscreen');
+  click_sound.play();
+  document.getElementById('startscreen').classList.add('d-none');
+  document.getElementById('imprintscreen').classList.remove('d-none');
+}
+
+function openDataProtection() {
+  lastEdited = document.getElementById('dataProtectionscreen');
+  click_sound.play();
+  document.getElementById('startscreen').classList.add('d-none');
+  document.getElementById('dataProtectionscreen').classList.remove('d-none');
 }
 
 window.addEventListener("keydown", (e) => {

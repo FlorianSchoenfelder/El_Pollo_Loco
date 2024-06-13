@@ -89,6 +89,17 @@
                 onmouseleave="stopHoverEffect()">Controls</button>
         </div>
 
+        <div class="importants">
+            <div class="imprint">
+                <button onclick="openImprint()" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()">Impressum</button>
+            </div>
+            <div class="dataProtection">
+                <button onclick="openDataProtection()" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()">Datenschutz</button>
+            </div>
+        </div>
+
     </div>
 
     <div id="controlsscreen" class="controlsscreen d-none">
@@ -154,6 +165,32 @@
             <p>Try Again!</p>
         </div>
         <img id="looseImg" class="looseImg" src="img/9_intro_outro_screens/game_over/game over.png">
+    </div>
+
+    <div id="imprintscreen" class="imprintAndDataProtectionscreen d-none">
+        <div class="headline">
+            <button id="backButton" class="backButton" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()">GO BACK</button>
+                <h2>Impressum</h2>
+        </div>
+        <div class="imprintContent">
+            <span>Impressum von:</span>
+            <p>Florian Schoenfelder</p> <br>
+            <p>Niedersachsen</p>
+            <p>Deutschland</p>
+        </div>
+    </div>
+
+    <div id="dataProtectionscreen" class="imprintAndDataProtectionscreen d-none">
+        <div class="headline">
+            <button id="backButton" class="backButton" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()">GO BACK</button>
+                <h2>Datenschutz</h2>
+        </div>
+        <div class="dataProtectionContent">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut neque aliquam veritatis quo cum accusantium, eius adipisci exercitationem culpa eaque accusamus ipsa fuga sunt odio illo harum. Voluptatem laboriosam amet, beatae nobis sit provident mollitia culpa voluptas excepturi optio ipsa fuga perferendis odio qui distinctio blanditiis, velit corporis fugiat sapiente necessitatibus! Explicabo nihil omnis, asperiores perspiciatis ducimus aspernatur atque voluptate quaerat? Animi velit eos error, repellendus culpa facilis nihil perspiciatis cupiditate modi hic, minima illo vel fugit ipsam delectus rerum amet, nulla voluptatibus veniam. Architecto nesciunt aliquid, explicabo repudiandae fuga velit nostrum debitis itaque illum dolor tenetur iure ad possimus!</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut neque aliquam veritatis quo cum accusantium, eius adipisci exercitationem culpa eaque accusamus ipsa fuga sunt odio illo harum. Voluptatem laboriosam amet, beatae nobis sit provident mollitia culpa voluptas excepturi optio ipsa fuga perferendis odio qui distinctio blanditiis, velit corporis fugiat sapiente necessitatibus! Explicabo nihil omnis, asperiores perspiciatis ducimus aspernatur atque voluptate quaerat? Animi velit eos error, repellendus culpa facilis nihil perspiciatis cupiditate modi hic, minima illo vel fugit ipsam delectus rerum amet, nulla voluptatibus veniam. Architecto nesciunt aliquid, explicabo repudiandae fuga velit nostrum debitis itaque illum dolor tenetur iure ad possimus!</p>
+        </div>
     </div>
 
 </body>

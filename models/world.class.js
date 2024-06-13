@@ -9,8 +9,7 @@ class World {
   statusBarCoin = new StatusBarCoin();
   statusBarBottle = new StatusBarBottle();
   statusBarEndboss = new StatusBarEndboss();
-  gamePaused = false;
-  test = false;
+  
   enemiesToRemove = [];
   deadEnemys= false;
   bottleNotCollected = false;
@@ -18,6 +17,9 @@ class World {
   pepeJumpedOnChicken = false;
   bottleCollisionWithEndboss = false;
   throwableObject = [];
+
+  gamePaused = false;
+  intervalIds = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -59,7 +61,6 @@ class World {
 
   run() {
     setInterval(() => {
-      // this.checkPaused();
       this.checkcollisions();
       this.checkcollisionsFromTop();
       this.checkCollactableCoin();
@@ -72,86 +73,7 @@ class World {
     }, 50);
   }
 
-//   checkPaused() {
-//     setInterval(() => {
-//         if (this.gamePaused) {
-//             this.muteAll();
-//             this.stopAnimationIntervals();
-//         }
-//         else if (!this.gamePaused) {
-//           this.startAnimationIntervals();
-//         }
-//     }, 200);
-// }
-
-//   stopAnimationIntervals() {
-//     this.level.enemies.forEach(enemy => {
-//         clearInterval(enemy.walkingInterval);
-//         clearInterval(enemy.walkingImagesInterval);
-//     });
-
-//     this.level.bottles.forEach(bottle => {
-//         clearInterval(bottle.animationInterval);
-//     });
-
-//     this.level.clouds.forEach(cloud => {
-//         clearInterval(cloud.animationInterval);
-//     });
-
-//     this.level.coins.forEach(coin => {
-//         clearInterval(coin.animationInterval);
-//     });
-
-//     clearInterval(this.character.animationInterval);
-//     clearInterval(this.character.movingInterval);
-
-//     if (this.level.endboss.length > 0) {
-//         clearInterval(this.level.endboss[0].animationInterval);
-//     }
-
-//     background_sound.pause();
-//     background_sound.currentTime = 0;
-// }
-
-// startAnimationIntervals() {
-//   this.level.enemies.forEach(enemy => {
-//       enemy.walkingInterval = setInterval(() => {
-//       }, 1000 / 120);
-//       enemy.walkingImagesInterval = setInterval(() => {
-//       }, 200);
-//   });
-
-//   this.level.bottles.forEach(bottle => {
-//       bottle.animationInterval = setInterval(() => {
-//       }, 1200);
-//   });
-
-//   this.level.clouds.forEach(cloud => {
-//       cloud.animationInterval = setInterval(() => {
-//       }, 1000 / 30);
-//   });
-
-//   this.level.coins.forEach(coin => {
-//       coin.animationInterval = setInterval(() => {
-//       }, 750);
-//   });
-
-//   this.character.animationInterval = setInterval(() => {
-      
-//   }, 150);
-
-//   this.character.movingInterval = setInterval(() => {
-      
-//   }, 1000 / 60);
-
-//   if (this.level.endboss.length > 0) {
-//       this.level.endboss[0].animationInterval = setInterval(() => {
-//       }, 200);
-//   }
-
-//   // background_sound.play();
-// }
-
+  
   checkThrowObject() {
     if (this.statusBarBottle.percentage >= 19) {
       if (this.keyboard.B && this.throwingButtonPressed == false) {

@@ -5,6 +5,9 @@ class Chicken extends MoveableObject {
   walkingImagesInterval;
   walkingInterval;
 
+  intervalIds = [];
+  i = 1;
+
   chickenDead_sound = new Audio("audio/chickenDead.mp3");
 
   offset = {
