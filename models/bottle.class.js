@@ -3,6 +3,8 @@ class Bottle extends MoveableObject {
     height = 70;
     y = 365;
     bottleCollecting_sound = new Audio("audio/bollteCollected.mp3");
+    bottleBarFull_sound = new Audio("audio/noBottleCollect.mp3");
+    animationInterval;
 
 
     offset = {
@@ -27,7 +29,7 @@ class Bottle extends MoveableObject {
         }
     
         animateBottle() {
-            setInterval(() => {
+            this.animationInterval = setInterval(() => {
                 this.playAnimation(this.IMAGES_Bottle_GROUND);
             }, 1200);
         }
@@ -37,4 +39,10 @@ class Bottle extends MoveableObject {
                 this.bottleCollecting_sound.play();                
             }
           }
+
+        noCollectAwailable() {
+            if (!muted) {
+                this.bottleBarFull_sound.play();                
+            }
+        }
 }

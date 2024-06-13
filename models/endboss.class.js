@@ -3,12 +3,13 @@ class Endboss extends MoveableObject {
   width = 190;
   y = 100;
   speed = 5;
-  endbossHurtInterval;
-  angryBossInterval;
-  walkingInterval;
-  checkforCharacterPositionIntertval;
   deadAnimationPlayed = false;
   attackAnimationPlayed = false;
+  animationInterval;
+
+  attack_sound = new Audio('audio/endbossAttack.mp3');
+  chickenDead_sound = new Audio("audio/chickenDead.mp3");
+  endbossHurt_sound = new Audio('audio/endbossHurt.mp3');
 
   offset = {
     top: 10,
@@ -75,11 +76,12 @@ class Endboss extends MoveableObject {
   }
 
   animate() {
-    setInterval(() => {
+    this.animationInterval = setInterval(() => {
       if (this.isEndbossDead()) {
         this.endbossDead();
         console.log('DEAD');
       } else if (this.isHurt()) {
+        this.endbossHurt_sound.play();
         this.playAnimation(this.IMAGES_HURT);
         console.log('HURT');
       } else if (this.calculatedDistance() <= 580) {
@@ -97,6 +99,9 @@ class Endboss extends MoveableObject {
 
   endbossDead() {
     if (!this.deadAnimationPlayed) {
+      if (!muted) {
+        this.chickenDead_sound.play();
+      }
       this.playAnimation(this.IMAGES_DEAD_ANIMATION);
       setTimeout(() => {
       this.deadAnimationPlayed = true;
@@ -113,6 +118,7 @@ class Endboss extends MoveableObject {
   attack() {
     if (!this.attackAnimationPlayed) {
       this.playAnimation(this.IMAGES_ATTACK);
+      this.attack_sound.play();
       setTimeout(() => {
       this.attackAnimationPlayed = false;
         

@@ -76,16 +76,18 @@ span {
   height: 110px;
 }
 
-#soundOnImg:hover, #soundOffImg:hover {
+#soundOnImg:hover, #soundOffImg:hover, #pauseGameImg:hover, #playGameImg:hover  {
   cursor: pointer;
 }
 
-#soundOnImg, #soundOffImg {
+#soundOnImg, #soundOffImg, #pauseGameImg, #playGameImg {
   width: 40px;
 }
 
 .soundControl {
   position: absolute;
+  display: flex;
+  gap: 30px;
     top: 30px;
     left: 50%;
     transform: translate(-50%, 0%);

@@ -7,8 +7,8 @@ class Character extends MoveableObject {
   idleStartTime = null; // Variable to store the time when the condition first becomes true
   deadAnimationPlayed = false;
 
-  idleInterval;
   animationInterval;
+  movingInterval;
 
   walking_sound = new Audio("audio/walking.mp3");
   snoring_sound = new Audio("audio/snoring.mp3");
@@ -107,11 +107,14 @@ class Character extends MoveableObject {
 
   animate() {
     //Moving
-    setInterval(() => {
+    this.movingInterval = setInterval(() => {
       this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
-        this.moveRight(); // Nach rechts laufen und Bild normal
+        if (this.world.keyboard.RIGHT && this.x <= this.world.level.endboss[0].x) { // Bedingung um nicht hinter den Endboss zu laufen
+          this.moveRight(); // Nach rechts laufen und Bild normal
         this.otherDirection = false;
+        }
+        
         
         if (!muted) {
           this.walking_sound.play(); // Sound vom laufen abspielen

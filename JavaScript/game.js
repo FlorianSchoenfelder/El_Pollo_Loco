@@ -27,6 +27,27 @@ function updateScreenWidth() {
   }
 }
 
+// function gamePaused() {
+//   world.gamePaused = true;
+//   world.test = true;
+//   muted = true;
+//   click_sound.play();
+//   document.getElementById('pauseGameImg').classList.add('d-none');
+//   document.getElementById('playGameImg').classList.remove('d-none');
+// }
+
+// function gameContinued() {
+//   world.gamePaused = false;
+//   world.test = false;
+//   muted = false;
+//   click_sound.play();
+//   document.getElementById('pauseGameImg').classList.remove('d-none');
+//   document.getElementById('playGameImg').classList.add('d-none');
+//   setTimeout(() => {
+//     world.test = true;
+//   }, 1500);
+// }
+
 function startGame() {
   lastEdited = document.getElementById('gamescreen');
   click_sound.play();
@@ -207,34 +228,42 @@ window.addEventListener("keyup", (e) => {
   //  console.log(e.keyCode);
 });
 
-document.getElementById('btnLeft').addEventListener('touchstart', () => {
+document.getElementById('btnLeft').addEventListener('pointerdown', (e) => {
+  e.preventDefault();
   keyboard.LEFT = true;
 });
 
-document.getElementById('btnLeft').addEventListener('touchend', () => {
+document.getElementById('btnLeft').addEventListener('pointerup', (e) => {
+  e.preventDefault();
   keyboard.LEFT = false;
 });
 
-document.getElementById('btnRight').addEventListener('touchstart', () => {
+document.getElementById('btnRight').addEventListener('pointerdown', (e) => {
+  e.preventDefault();
   keyboard.RIGHT = true;
 });
 
-document.getElementById('btnRight').addEventListener('touchend', () => {
+document.getElementById('btnRight').addEventListener('pointerup', (e) => {
+  e.preventDefault();
   keyboard.RIGHT = false;
 });
 
-document.getElementById('jump').addEventListener('touchstart', () => {
+document.getElementById('jump').addEventListener('pointerdown', (e) => {
+  e.preventDefault();
   keyboard.SPACE = true;
 });
 
-document.getElementById('jump').addEventListener('touchend', () => {
+document.getElementById('jump').addEventListener('pointerup', (e) => {
+  e.preventDefault();
   keyboard.SPACE = false;
 });
 
-document.getElementById('bottleThrow').addEventListener('touchstart', () => {
+document.getElementById('bottleThrow').addEventListener('pointerdown', (e) => {
+  e.preventDefault();
   keyboard.B = true;
 });
 
-document.getElementById('bottleThrow').addEventListener('touchend', () => {
+document.getElementById('bottleThrow').addEventListener('pointerup', (e) => {
+  e.preventDefault();
   keyboard.B = false;
 });
