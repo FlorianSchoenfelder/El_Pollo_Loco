@@ -111,29 +111,34 @@ class Character extends MoveableObject {
       this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
         if (this.world.keyboard.RIGHT && this.x <= this.world.level.endboss[0].x) { // Bedingung um nicht hinter den Endboss zu laufen
-          this.moveRight(); // Nach rechts laufen und Bild normal
-        this.otherDirection = false;
+          if (!this.world.level.endboss[0].deadAnimationPlayed) {
+            this.moveRight(); // Nach rechts laufen und Bild normal
+            this.otherDirection = false;
+          }
         }
-        
-        
         if (!muted) {
           this.walking_sound.play(); // Sound vom laufen abspielen
         }
         this.snoring_sound.pause();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
+        if (!this.world.level.endboss[0].deadAnimationPlayed) {
         this.moveLeft(); // Nach links laufen und Bild gedreht
         this.otherDirection = true;
+        console.log(this.otherDirection);
+        }
         if (!muted) {
           this.walking_sound.play(); // Sound vom laufen abspielen
         }
         this.snoring_sound.pause();
       }
       if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
+        if (!this.world.level.endboss[0].deadAnimationPlayed) {
         this.jump();
+        }
         if (!muted) {
           this.jumping_sound.play();
-        } 
+        }
       }
 
       this.world.camera_x = -this.x + 100;

@@ -28,18 +28,9 @@ function updateScreenWidth() {
   }
 }
 
-// function setStopableInterval(fn, time) {
-//   let id = setInterval(fn, time);
-//   intervalIds.push(id);
-
-// }
-
 function gamePaused() {
-  // world.gamePaused = true;
-  // world.test = true;
-  // muted = true;
-  // click_sound.play();
-  // clearAllIntervals();
+  world.gamePaused = true;
+  clearAllIntervals();
   document.getElementById('pauseGameImg').classList.add('d-none');
   document.getElementById('playGameImg').classList.remove('d-none');
 
@@ -50,13 +41,27 @@ function clearAllIntervals() {
 }
 
 function gameContinued() {
-  // world.gamePaused = false;
-  // world.test = false;
-  // muted = false;
-  // click_sound.play();
-  // setStopableInterval();
+  world.gamePaused = false;
+  checkContinued();
   document.getElementById('pauseGameImg').classList.remove('d-none');
   document.getElementById('playGameImg').classList.add('d-none');
+}
+
+function checkContinued() {
+  if (this.gamePaused) {
+    world.run();
+    world.level.enemies.forEach((enemy) => {enemy.animateWalking()});
+    world.level.enemies.forEach((enemy) => {enemy.animate()});
+    world.level.coins.forEach((coin) => {coin.animateCoin()});
+    world.level.clouds.forEach((cloud) => {cloud.animate()});
+    world.level.bottles.forEach((bottle) => {bottle.animateBottle()});
+    world.throwableObject.forEach((object) => {object.throw()});
+    world.throwableObject.forEach((object) => {object.rotateBottle()});
+    world.level.endboss[0].animate();
+    world.character.animate();
+    world.character.applyGravity();
+
+  }
 }
 
 function startGame() {
@@ -101,6 +106,14 @@ function playHoverEffect() {
 
 function stopHoverEffect() {
   hover_sound.pause();
+}
+
+function showHint() {
+  document.getElementById('hintContent').classList.remove('d-none');
+}
+
+function leaveHint() {
+  document.getElementById('hintContent').classList.add('d-none');
 }
 
 function showControls() {
@@ -172,17 +185,45 @@ function unmuteSound() {
 }
 
 function openImprint() {
-  lastEdited = document.getElementById('imprintscreen');
   click_sound.play();
-  document.getElementById('startscreen').classList.add('d-none');
+  document.getElementById('menuscreen').classList.add('d-none');
   document.getElementById('imprintscreen').classList.remove('d-none');
 }
 
 function openDataProtection() {
-  lastEdited = document.getElementById('dataProtectionscreen');
+  click_sound.play();
+  document.getElementById('menuscreen').classList.add('d-none');
+  document.getElementById('dataProtectionscreen').classList.remove('d-none');
+}
+
+function openInformationCard() {
+  lastEdited = document.getElementById('informationscreen');
   click_sound.play();
   document.getElementById('startscreen').classList.add('d-none');
-  document.getElementById('dataProtectionscreen').classList.remove('d-none');
+  document.getElementById('informationscreen').classList.remove('d-none');
+}
+
+function backToInformationScreen(value) {
+  lastEdited = document.getElementById('informationscreen');
+
+  click_sound.play();
+  if (value == 'imprint') {
+    document.getElementById('menuscreen').classList.remove('d-none');
+  document.getElementById('imprintscreen').classList.add('d-none');
+  } else if (value == 'data') {
+    document.getElementById('menuscreen').classList.remove('d-none');
+  document.getElementById('dataProtectionscreen').classList.add('d-none');
+  }
+  else if (value == 'about') {
+    document.getElementById('menuscreen').classList.remove('d-none');
+    document.getElementById('aboutTheGamescreen').classList.add('d-none');
+  }
+}
+
+function openAboutTheGame() {
+  click_sound.play();
+  document.getElementById('menuscreen').classList.add('d-none');
+  document.getElementById('aboutTheGamescreen').classList.remove('d-none');
 }
 
 window.addEventListener("keydown", (e) => {

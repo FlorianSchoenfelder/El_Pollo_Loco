@@ -18,6 +18,7 @@
     <script src="models/cloud.class.js"></script>
     <script src="models/character.class.js"></script>
     <script src="models/chicken.class.js"></script>
+    <script src="models/chicken-small-class.js"></script>
     <script src="models/background-object.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/endboss.class.js"></script>
@@ -31,7 +32,7 @@
 
     <script src="levels/level1.js"></script>
 
-    <script src="JavaScript/game.js" defer></script>
+    <script src="js/game.js" defer></script>
 
 </head>
 
@@ -46,12 +47,12 @@
         </canvas>
         <div id="soundControl" class="soundControl d-none">
             <div class="sound">
-                <img id="soundOnImg" onclick="muteSound()" src="img/myImages/soundOn.png">
-                <img id="soundOffImg" class="d-none" onclick="unmuteSound()" src="img/myImages/soundOff.png">
+                <img id="soundOnImg" onclick="muteSound()" src="img/myImages/newIcons/soundOn.png">
+                <img id="soundOffImg" class="d-none" onclick="unmuteSound()" src="img/myImages/newIcons/soundOff.png">
             </div>
             <div class="pause">
-                <img id="pauseGameImg" onclick="gamePaused()" src="img/myImages/pause.png">
-                <img id="playGameImg" class="d-none" onclick="gameContinued()" src="img/myImages/play.png">
+                <img id="pauseGameImg" onclick="gamePaused()" src="img/myImages/newIcons/pauseButton.png">
+                <img id="playGameImg" class="d-none" onclick="gameContinued()" src="img/myImages/newIcons/playButton.png">
             </div>
         </div>
 
@@ -83,29 +84,28 @@
 
 
     <div id="startscreen" class="startscreen">
+        <div id="hintContent" class="hint d-none">
+            <span class="hinttext">Do you want to check the Controls first?</span>
+            
+        </div>
         <div class="buttons">
-            <button onclick="startGame()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()">Play</button>
-            <button onclick="showControls()" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()">Controls</button>
+            <button onclick="startGame()" onmouseover="playHoverEffect(), showHint()" onmouseleave="stopHoverEffect(), leaveHint()"><img
+                    src="img/myImages/newIcons/playButton.png"></button>
+            <button onclick="showControls()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()"><img
+                    src="img/myImages/newIcons/controls.png"></button>
         </div>
 
-        <div class="importants">
-            <div class="imprint">
-                <button onclick="openImprint()" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()">Impressum</button>
-            </div>
-            <div class="dataProtection">
-                <button onclick="openDataProtection()" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()">Datenschutz</button>
-            </div>
-        </div>
-
+        <img onclick="openInformationCard()" class="informationImg" onmouseover="playHoverEffect()"
+            onmouseleave="stopHoverEffect()" src="img/myImages/newIcons/informations.png">
     </div>
 
     <div id="controlsscreen" class="controlsscreen d-none">
         <div class="headline">
-            <button id="backButton" class="backButton" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()">GO BACK</button>
+            
+                <button class="backButtons" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
+            
+
             <h2>How to play</h2>
         </div>
 
@@ -167,30 +167,93 @@
         <img id="looseImg" class="looseImg" src="img/9_intro_outro_screens/game_over/game over.png">
     </div>
 
-    <div id="imprintscreen" class="imprintAndDataProtectionscreen d-none">
-        <div class="headline">
-            <button id="backButton" class="backButton" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()">GO BACK</button>
-                <h2>Impressum</h2>
-        </div>
-        <div class="imprintContent">
-            <span>Impressum von:</span>
-            <p>Florian Schoenfelder</p> <br>
-            <p>Niedersachsen</p>
-            <p>Deutschland</p>
-        </div>
-    </div>
+    <div id="informationscreen" class="informationscreen d-none">
+        <div id="menuscreen" class="menuscreen">
+            <div class="headline">
+            
+                <button class="backButtons" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
+                    onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
+            
 
-    <div id="dataProtectionscreen" class="imprintAndDataProtectionscreen d-none">
-        <div class="headline">
-            <button id="backButton" class="backButton" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()">GO BACK</button>
+                <h2>Informations</h2>
+            </div>
+            <div class="informationContent">
+                <div onclick="openImprint()" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()" class="personalContent">
+                    <img src="img/myImages/newIcons/contactDetails.png">
+                    <span>Imprint</span>
+                </div>
+                <div onclick="openDataProtection()" onmouseover="playHoverEffect()"
+                    onmouseleave="stopHoverEffect()" class="dataProtectionInformation">
+                    <img src="img/myImages/newIcons/icon.png">
+                    <span>Data Protection</span>
+                </div>
+                <div onclick="openAboutTheGame()" onmouseover="playHoverEffect()"
+                    onmouseleave="stopHoverEffect()" class="dataProtectionInformation">
+                    <img src="img/myImages/newIcons/informations.png">
+                    <span>About the game</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="imprintscreen" class="imprintAndDataProtectionscreen d-none">
+            <div class="headline">
+            
+                <button class="backButtons" onclick="backToInformationScreen('imprint')" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
+                <h2>Impressum</h2>
+            </div>
+            <div class="imprintContent">
+                <span>Impressum von:</span>
+                <p>Florian Schoenfelder</p> <br>
+                <p>Niedersachsen</p>
+                <p>Deutschland</p>
+            </div>
+        </div>
+
+        <div id="dataProtectionscreen" class="imprintAndDataProtectionscreen d-none">
+            <div class="headline"> 
+                <button class="backButtons" onclick="backToInformationScreen('data')" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
                 <h2>Datenschutz</h2>
+            </div>
+            <div class="dataProtectionContent">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut neque aliquam veritatis quo cum
+                    accusantium, eius adipisci exercitationem culpa eaque accusamus ipsa fuga sunt odio illo harum.
+                    Voluptatem laboriosam amet, beatae nobis sit provident mollitia culpa voluptas excepturi optio ipsa
+                    fuga perferendis odio qui distinctio blanditiis, velit corporis fugiat sapiente necessitatibus!
+                    Explicabo nihil omnis, asperiores perspiciatis ducimus aspernatur atque voluptate quaerat? Animi
+                    velit eos error, repellendus culpa facilis nihil perspiciatis cupiditate modi hic, minima illo vel
+                    fugit ipsam delectus rerum amet, nulla voluptatibus veniam. Architecto nesciunt aliquid, explicabo
+                    repudiandae fuga velit nostrum debitis itaque illum dolor tenetur iure ad possimus!</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut neque aliquam veritatis quo cum
+                    accusantium, eius adipisci exercitationem culpa eaque accusamus ipsa fuga sunt odio illo harum.
+                    Voluptatem laboriosam amet, beatae nobis sit provident mollitia culpa voluptas excepturi optio ipsa
+                    fuga perferendis odio qui distinctio blanditiis, velit corporis fugiat sapiente necessitatibus!
+                    Explicabo nihil omnis, asperiores perspiciatis ducimus aspernatur atque voluptate quaerat? Animi
+                    velit eos error, repellendus culpa facilis nihil perspiciatis cupiditate modi hic, minima illo vel
+                    fugit ipsam delectus rerum amet, nulla voluptatibus veniam. Architecto nesciunt aliquid, explicabo
+                    repudiandae fuga velit nostrum debitis itaque illum dolor tenetur iure ad possimus!</p>
+            </div>
         </div>
-        <div class="dataProtectionContent">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut neque aliquam veritatis quo cum accusantium, eius adipisci exercitationem culpa eaque accusamus ipsa fuga sunt odio illo harum. Voluptatem laboriosam amet, beatae nobis sit provident mollitia culpa voluptas excepturi optio ipsa fuga perferendis odio qui distinctio blanditiis, velit corporis fugiat sapiente necessitatibus! Explicabo nihil omnis, asperiores perspiciatis ducimus aspernatur atque voluptate quaerat? Animi velit eos error, repellendus culpa facilis nihil perspiciatis cupiditate modi hic, minima illo vel fugit ipsam delectus rerum amet, nulla voluptatibus veniam. Architecto nesciunt aliquid, explicabo repudiandae fuga velit nostrum debitis itaque illum dolor tenetur iure ad possimus!</p>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut neque aliquam veritatis quo cum accusantium, eius adipisci exercitationem culpa eaque accusamus ipsa fuga sunt odio illo harum. Voluptatem laboriosam amet, beatae nobis sit provident mollitia culpa voluptas excepturi optio ipsa fuga perferendis odio qui distinctio blanditiis, velit corporis fugiat sapiente necessitatibus! Explicabo nihil omnis, asperiores perspiciatis ducimus aspernatur atque voluptate quaerat? Animi velit eos error, repellendus culpa facilis nihil perspiciatis cupiditate modi hic, minima illo vel fugit ipsam delectus rerum amet, nulla voluptatibus veniam. Architecto nesciunt aliquid, explicabo repudiandae fuga velit nostrum debitis itaque illum dolor tenetur iure ad possimus!</p>
+
+        <div id="aboutTheGamescreen" class="aboutTheGame d-none">
+            <div class="headline">
+            
+                <button class="backButtons" onclick="backToInformationScreen('about')" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
+                <h2>About El Pollo Loco</h2>
+            </div>
+            <div class="aboutTheGameContent">
+                <span>El Pollo Loco is a 2D action game in which a Mexican hero fights chicks, chickens and a giant chicken boss. Jump on chicks and chickens and throw Tabasco bottles at the boss to win.
+                    Beat the boss to emerge victorious!</span>
+                    <br>
+                    <br>
+                    <span>Have fun!</span>
+            </div>
         </div>
+
     </div>
 
 </body>

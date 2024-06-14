@@ -14,11 +14,11 @@ class ThrowableObject extends MoveableObject {
   ];
 
   IMAGES_ROTATE = [
-    'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
-    'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
-    'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
-    'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
-  ]
+    "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+    "img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
+    "img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
+    "img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
+  ];
 
   constructor(x, y) {
     super().loadImage("img/6_salsa_bottle/salsa_bottle.png");
@@ -32,24 +32,34 @@ class ThrowableObject extends MoveableObject {
   }
 
   throw() {
-    this.speedY = 16;
-    this.applyGravity();
-    this.throwableObject = setInterval(() => {
-      this.rotateBottle();
-      this.x += 18;
-    }, 30);
-    
-    this.releaseGravity();
+    if (world.character.otherDirection) {
+      this.x = this.x - 90;
+      this.y = this.y - 35;
+      this.speedY = 16;
+      this.applyGravity();
+      this.throwableObject = setInterval(() => {
+        this.rotateBottle();
+        this.x -= 18;
+      }, 30);
+
+      this.releaseGravity();
+    } else {
+      this.speedY = 16;
+      this.applyGravity();
+      this.throwableObject = setInterval(() => {
+        this.rotateBottle();
+        this.x += 18;
+      }, 30);
+      this.releaseGravity();
+    }
+    setTimeout(() => {
+        world.throwingButtonPressed = false;
+      }, 1500);
   }
 
   rotateBottle() {
-
-      // setInterval(() => {
-    this.playAnimation(this.IMAGES_ROTATE)
-        
-      // }, 50);
-    }
-
+    this.playAnimation(this.IMAGES_ROTATE);
+  }
 
   releaseGravity() {
     this.releaseGravityIntrerval = setInterval(() => {
@@ -57,21 +67,19 @@ class ThrowableObject extends MoveableObject {
         this.y = 365;
         this.speedY = 0;
         clearInterval(this.throwableObject);
-
         this.splash();
       }
     }, 25);
   }
 
   splash() {
-    clearInterval(this.throwableObject);
-
     this.speedY = 0;
+    clearInterval(this.throwableObject);
     clearInterval(this.releaseGravityIntrerval);
     clearInterval(this.applyGravityInterval);
     this.playAnimation(this.IMAGES_SPLASH);
     if (!muted) {
-    this.cracking_sound.play();      
+      this.cracking_sound.play();
     }
     console.log(this.y);
     setTimeout(() => {

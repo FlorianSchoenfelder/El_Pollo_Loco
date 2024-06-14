@@ -81,7 +81,9 @@ class Endboss extends MoveableObject {
         this.endbossDead();
         console.log('DEAD');
       } else if (this.isHurt()) {
-        this.endbossHurt_sound.play();
+        if (!muted) {
+          this.endbossHurt_sound.play();
+        }
         this.playAnimation(this.IMAGES_HURT);
         console.log('HURT');
       } else if (this.calculatedDistance() <= 580) {
@@ -102,9 +104,10 @@ class Endboss extends MoveableObject {
       if (!muted) {
         this.chickenDead_sound.play();
       }
+      this.deadAnimationPlayed = true;
       this.playAnimation(this.IMAGES_DEAD_ANIMATION);
       setTimeout(() => {
-      this.deadAnimationPlayed = true;
+      
         
       }, 1000);
     } else {
