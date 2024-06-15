@@ -7,13 +7,13 @@ class Endboss extends MoveableObject {
   attackAnimationPlayed = false;
   animationInterval;
 
-  attack_sound = new Audio('audio/endbossAttack.mp3');
+  attack_sound = new Audio("audio/endbossAttack.mp3");
   chickenDead_sound = new Audio("audio/chickenDead.mp3");
-  endbossHurt_sound = new Audio('audio/endbossHurt.mp3');
+  endbossHurt_sound = new Audio("audio/endbossHurt.mp3");
 
   offset = {
-    top: 10,
-    left: 20,
+    top: 60,
+    left: 35,
     right: 30,
     bottom: 0,
   };
@@ -43,25 +43,23 @@ class Endboss extends MoveableObject {
   ];
 
   IMAGES_ATTACK = [
-    'img/4_enemie_boss_chicken/3_attack/G13.png',
-    'img/4_enemie_boss_chicken/3_attack/G14.png',
-    'img/4_enemie_boss_chicken/3_attack/G15.png',
-    'img/4_enemie_boss_chicken/3_attack/G16.png',
-    'img/4_enemie_boss_chicken/3_attack/G17.png',
-    'img/4_enemie_boss_chicken/3_attack/G18.png',
-    'img/4_enemie_boss_chicken/3_attack/G19.png',
-    'img/4_enemie_boss_chicken/3_attack/G20.png',
-  ]
+    "img/4_enemie_boss_chicken/3_attack/G13.png",
+    "img/4_enemie_boss_chicken/3_attack/G14.png",
+    "img/4_enemie_boss_chicken/3_attack/G15.png",
+    "img/4_enemie_boss_chicken/3_attack/G16.png",
+    "img/4_enemie_boss_chicken/3_attack/G17.png",
+    "img/4_enemie_boss_chicken/3_attack/G18.png",
+    "img/4_enemie_boss_chicken/3_attack/G19.png",
+    "img/4_enemie_boss_chicken/3_attack/G20.png",
+  ];
 
   IMAGES_DEAD_ANIMATION = [
-    'img/4_enemie_boss_chicken/5_dead/G24.png',
-    'img/4_enemie_boss_chicken/5_dead/G25.png',
-    'img/4_enemie_boss_chicken/5_dead/G26.png',
-  ]
+    "img/4_enemie_boss_chicken/5_dead/G24.png",
+    "img/4_enemie_boss_chicken/5_dead/G25.png",
+    "img/4_enemie_boss_chicken/5_dead/G26.png",
+  ];
 
-  IMAGES_DEAD_LAST = [
-    'img/4_enemie_boss_chicken/5_dead/G26.png',
-  ]
+  IMAGES_DEAD_LAST = ["img/4_enemie_boss_chicken/5_dead/G26.png"];
 
   constructor() {
     super().loadImage(this.IMAGES_ALERT[0]);
@@ -79,16 +77,11 @@ class Endboss extends MoveableObject {
     this.animationInterval = setInterval(() => {
       if (this.isEndbossDead()) {
         this.endbossDead();
-        console.log('DEAD');
       } else if (this.isHurt()) {
-        if (!muted) {
-          this.endbossHurt_sound.play();
-        }
-        this.playAnimation(this.IMAGES_HURT);
-        console.log('HURT');
-      } else if (this.calculatedDistance() <= 580) {
+        this.endbossHurt();
+      } else if (this.sawCharacter()) {
         this.endbossWalk();
-      } else if(!this.isHurt() && this.endbossDetectedPepe == false) {
+      } else if (!this.isHurt() && this.endbossDetectedPepe == false) {
         this.playAnimation(this.IMAGES_ALERT);
       }
     }, 200);
@@ -99,44 +92,65 @@ class Endboss extends MoveableObject {
     return distance;
   }
 
+  sawCharacter() {
+    return this.calculatedDistance() <= 580;
+  }
+
   endbossDead() {
     if (!this.deadAnimationPlayed) {
-      if (!muted) {
-        this.chickenDead_sound.play();
-      }
-      this.deadAnimationPlayed = true;
-      this.playAnimation(this.IMAGES_DEAD_ANIMATION);
-      setTimeout(() => {
-      
-        
-      }, 1000);
+      this.playDeadAnimation();
     } else {
-      this.playAnimation(this.IMAGES_DEAD_LAST);
-      setTimeout(() => {
-        playEndScreen();
-      }, 1500);
+      this.playLastDeadImage();
+    }
+  }
+
+  playDeadAnimation() {
+    if (!muted) {
+      this.chickenDead_sound.play();
+    }
+    this.deadAnimationPlayed = true;
+    this.playAnimation(this.IMAGES_DEAD_ANIMATION);
+    setTimeout(() => {}, 1000);
+  }
+
+  playLastDeadImage() {
+    this.playAnimation(this.IMAGES_DEAD_LAST);
+    setTimeout(() => {
+      playEndScreen();
+    }, 1500);
+  }
+
+  endbossHurt() {
+    this.playAnimation(this.IMAGES_HURT);
+    if (!muted) {
+      this.endbossHurt_sound.play();
     }
   }
 
   attack() {
     if (!this.attackAnimationPlayed) {
-      this.playAnimation(this.IMAGES_ATTACK);
-      this.attack_sound.play();
-      setTimeout(() => {
-      this.attackAnimationPlayed = false;
-        
-      }, 1000);
+      this.playAttackAnimation();
     }
   }
 
+  playAttackAnimation() {
+    this.playAnimation(this.IMAGES_ATTACK);
+    if (!muted) {
+      this.attack_sound.play();
+    }
+    
+    setTimeout(() => {
+      this.attackAnimationPlayed = false;
+    }, 1000);
+  }
+
   animateWalking() {
-      this.playAnimation(this.IMAGES_WALKING);
+    this.playAnimation(this.IMAGES_WALKING);
   }
 
   endbossWalk() {
     this.endbossDetectedPepe = true;
     this.moveLeft();
     this.animateWalking();
-
   }
 }

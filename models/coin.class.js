@@ -34,6 +34,7 @@ class Coin extends MoveableObject {
 
   collectCoinSound() {
     if (!muted) {
+      this.coinCollecting_sound.volume = 1;
       this.coinCollecting_sound.play();
     }
   }

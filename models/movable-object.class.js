@@ -7,11 +7,8 @@ class MoveableObject extends DrawableObject {
   endbossEnergy = 100;
   coins = 0;
   bottles = 0;
-
   lastHit = 0;
-
   applyGravityInterval;
-
 
   offset = {
     top: 0,
@@ -22,12 +19,10 @@ class MoveableObject extends DrawableObject {
 
   collectCoin() {
     this.coins += 20;
-    console.log(this.coins,"Coins");
   }
 
   collectBottle() {
     this.bottles += 20;
-    console.log(this.bottles, 'Bottles');
   }
 
   removeBottle() {
@@ -35,27 +30,35 @@ class MoveableObject extends DrawableObject {
   }
 
   hit(identification) {
-    if (identification == 'endboss') {
-      this.endbossEnergy -= 20;
-      if (this.endbossEnergy <= 0) {
-        this.endbossEnergy = 0;
-      } else {
-        this.lastHit = new Date().getTime();
-      }
-    } else if (identification == 'character') {
-      this.energy -= 1;
-        if (this.energy <= 0) {
-          this.energy = 0;
-        } else {
-          this.lastHit = new Date().getTime();
-        }
+    if (identification == "endboss") {
+      this.hitEndboss();
+    } else if (identification == "character") {
+      this.hitCharacter();
+    }
+  }
+
+  hitEndboss() {
+    this.endbossEnergy -= 20;
+    if (this.endbossEnergy <= 0) {
+      this.endbossEnergy = 0;
+    } else {
+      this.lastHit = new Date().getTime();
+    }
+  }
+
+  hitCharacter() {
+    this.energy -= 3;
+    if (this.energy <= 15) {
+      this.energy = 0;
+    } else {
+      this.lastHit = new Date().getTime();
     }
   }
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000;
-    return timepassed < 0.50;
+    return timepassed < 0.5;
   }
 
   isDead() {
@@ -81,8 +84,8 @@ class MoveableObject extends DrawableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
-    }, 1000 / 60 );
-  } 
+    }, 1000 / 60);
+  }
 
   isAboveGround() {
     if (this instanceof ThrowableObject) {

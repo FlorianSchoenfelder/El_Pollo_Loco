@@ -14,13 +14,13 @@
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 html {
@@ -46,6 +46,10 @@ body {
 
 .d-none {
   display: none !important;
+}
+
+.brownColor {
+  color: rgb(114, 23, 23);
 }
 
 .no-underline {
@@ -85,8 +89,11 @@ span {
 }
 
 #rotateImage {
-  padding-top: 40px;
-  height: 110px;
+  height: 120px;
+}
+
+#rotateHint {
+  color: rgb(114, 23, 23);
 }
 
 #soundOnImg:hover,
@@ -157,7 +164,7 @@ span {
     #e95115 45%,
     #a2480c 75%
   ); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: url('img/5_background/first_half_background.png');
+  background: url("img/5_background/first_half_background.png");
   background-position: center;
   background-size: cover;
 }
@@ -271,7 +278,6 @@ span {
   border-radius: 50%;
   transition: 0.25s;
 
-
   /* background: rgb(255, 201, 29);
   background: linear-gradient(
     180deg,
@@ -287,14 +293,14 @@ span {
   /* font-size: 22px; */
 }
 
-.buttons button:hover {  
+.buttons button:hover {
   cursor: pointer;
   scale: 1.2;
 }
 
-.buttons button img{
- width: 75px;
- height: 75px;
+.buttons button img {
+  width: 75px;
+  height: 75px;
 }
 
 .informationImg {
@@ -304,7 +310,6 @@ span {
   top: 16px;
   left: 16px;
   transition: 0.25s;
-
 }
 
 .informationImg:hover {
@@ -432,24 +437,29 @@ li:nth-child(3) {
     #e95115 45%,
     #a2480c 75%
   ); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: url('img/5_background/first_half_background.png');
+  background: url("img/5_background/first_half_background.png");
   background-position: center;
   background-size: cover;
 }
 
-.menuscreen, .imprintAndDataProtectionscreen, .aboutTheGame {
+.menuscreen,
+.imprintAndDataProtectionscreen,
+.aboutTheGame {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .aboutTheGameContent {
   flex-grow: 1;
   padding: 50px 12px 0px 12px;
+  overflow-y: auto;
 }
 
-.aboutTheGameContent span{
+.aboutTheGameContent span {
   font-size: 32px;
 }
 
@@ -459,24 +469,26 @@ li:nth-child(3) {
   flex-direction: column;
   padding-top: 60px;
   position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translate(-50%, 0);
-  
+  top: 60px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
-.personalContent, .dataProtectionInformation {
+.personalContent,
+.dataProtectionInformation {
   display: flex;
   gap: 24px;
   transition: 0.25s;
 }
 
-.personalContent:hover, .dataProtectionInformation:hover {
+.personalContent:hover,
+.dataProtectionInformation:hover {
   cursor: pointer;
   scale: 1.2;
 }
 
-.personalContent span, .dataProtectionInformation span {
+.personalContent span,
+.dataProtectionInformation span {
   flex-wrap: wrap;
   align-content: center;
 }
@@ -488,13 +500,48 @@ li:nth-child(3) {
   text-align: center;
 }
 
-.imprintContent p{
+.imprintContent p {
   font-size: 32px;
 }
 
 .dataProtectionContent {
-  padding-top: 24px;
+  padding: 12px;
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  justify-content: start;
+  border: rgba(0, 0, 0, 1);
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
 }
+
+.linkContainer {
+  max-height: 300px;
+  max-width: 200px;
+  border: 1px solid;
+  border-radius: 24px;
+  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.links a {
+  color: black;
+}
+
+/* .linkFooter {
+  /* position: absolute; */
+  /* bottom: 23px; */
+/* } */
 
 .headline {
   height: 60px;
@@ -589,11 +636,9 @@ li:nth-child(3) {
 }
 
 @media only screen and (max-height: 360px) {
-  /* .informationContent {
-    padding: 0;
+  .aboutTheGameContent {
+    padding: 20px 12px 0px 12px;
   }
-
-   */
 }
 
 @media only screen and (max-height: 430px) {
@@ -602,7 +647,7 @@ li:nth-child(3) {
     gap: 24px;
   }
 
-  .informationContent div span{
+  .informationContent div span {
     display: none;
   }
 }
@@ -631,5 +676,3 @@ li:nth-child(3) {
     padding-bottom: unset !important;
   }
 }
-
-

@@ -32,29 +32,41 @@ class ThrowableObject extends MoveableObject {
   }
 
   throw() {
-    if (world.character.otherDirection) {
-      this.x = this.x - 90;
-      this.y = this.y - 35;
-      this.speedY = 16;
-      this.applyGravity();
-      this.throwableObject = setInterval(() => {
-        this.rotateBottle();
-        this.x -= 18;
-      }, 30);
-
-      this.releaseGravity();
+    if (this.isCharacterLookingLeft()) {
+      this.throwBottleToLeft();
     } else {
-      this.speedY = 16;
-      this.applyGravity();
-      this.throwableObject = setInterval(() => {
-        this.rotateBottle();
-        this.x += 18;
-      }, 30);
-      this.releaseGravity();
+      this.throwBottleToRight();
     }
     setTimeout(() => {
-        world.throwingButtonPressed = false;
-      }, 1500);
+      world.throwingButtonPressed = false;
+    }, 1500);
+  }
+
+  isCharacterLookingLeft() {
+    return world.character.otherDirection;
+  }
+
+  throwBottleToLeft() {
+    this.x = this.x - 90;
+    this.y = this.y - 35;
+    this.speedY = 16;
+    this.applyGravity();
+    this.throwableObject = setInterval(() => {
+      this.rotateBottle();
+      this.x -= 18;
+    }, 30);
+
+    this.releaseGravity();
+  }
+
+  throwBottleToRight() {
+    this.speedY = 16;
+    this.applyGravity();
+    this.throwableObject = setInterval(() => {
+      this.rotateBottle();
+      this.x += 18;
+    }, 30);
+    this.releaseGravity();
   }
 
   rotateBottle() {
@@ -74,14 +86,21 @@ class ThrowableObject extends MoveableObject {
 
   splash() {
     this.speedY = 0;
-    clearInterval(this.throwableObject);
-    clearInterval(this.releaseGravityIntrerval);
-    clearInterval(this.applyGravityInterval);
+    this.clearBottleInterval();
     this.playAnimation(this.IMAGES_SPLASH);
     if (!muted) {
       this.cracking_sound.play();
     }
-    console.log(this.y);
+    this.removeBottleOfMap();
+  }
+
+  clearBottleInterval() {
+    clearInterval(this.throwableObject);
+    clearInterval(this.releaseGravityIntrerval);
+    clearInterval(this.applyGravityInterval);
+  }
+
+  removeBottleOfMap() {
     setTimeout(() => {
       world.throwableObject.splice(0, 1);
       world.bottleCollisionWithEndboss = false;

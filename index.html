@@ -39,7 +39,7 @@
 <body id="body">
     <h1 id="headline">Welcome to El-Pollo-Loco!</h1>
     <h2 id="rotateHint" class="d-none no-underline">To play, please rotate your device!</h2>
-    <img src="img/myImages/rotate.png" id="rotateImage" class="d-none">
+    <img src="img/myImages/newIcons/rotate.png" id="rotateImage" class="d-none">
 
     <div id="gamescreen" class="gameScreen d-none">
         <canvas id="canvas" class="d-none" width="720" height="480px">
@@ -52,7 +52,8 @@
             </div>
             <div class="pause">
                 <img id="pauseGameImg" onclick="gamePaused()" src="img/myImages/newIcons/pauseButton.png">
-                <img id="playGameImg" class="d-none" onclick="gameContinued()" src="img/myImages/newIcons/playButton.png">
+                <img id="playGameImg" class="d-none" onclick="gameContinued()"
+                    src="img/myImages/newIcons/playButton.png">
             </div>
         </div>
 
@@ -86,11 +87,11 @@
     <div id="startscreen" class="startscreen">
         <div id="hintContent" class="hint d-none">
             <span class="hinttext">Do you want to check the Controls first?</span>
-            
+
         </div>
         <div class="buttons">
-            <button onclick="startGame()" onmouseover="playHoverEffect(), showHint()" onmouseleave="stopHoverEffect(), leaveHint()"><img
-                    src="img/myImages/newIcons/playButton.png"></button>
+            <button onclick="startGame()" onmouseover="playHoverEffect(), showHint()"
+                onmouseleave="stopHoverEffect(), leaveHint()"><img src="img/myImages/newIcons/playButton.png"></button>
             <button onclick="showControls()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()"><img
                     src="img/myImages/newIcons/controls.png"></button>
         </div>
@@ -101,10 +102,11 @@
 
     <div id="controlsscreen" class="controlsscreen d-none">
         <div class="headline">
-            
-                <button class="backButtons" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
-            
+
+            <button class="backButtons" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
+                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png"
+                    alt=""></button>
+
 
             <h2>How to play</h2>
         </div>
@@ -151,7 +153,7 @@
     <div id="winningscreen" class="winningscreen d-none">
         <div class="backToStartscreen" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
             onmouseleave="stopHoverEffect()">
-            <img class="restartImg" src="img/myImages/restart.png">
+            <img class="restartImg" src="img/myImages/newIcons/restartButton.png">
             <p>Back Home</p>
         </div>
         <img id="wonImg" class="wonImg" src="img/9_intro_outro_screens/win/won_1.png">
@@ -161,7 +163,7 @@
     <div id="loosingscreen" class="loosingscreen d-none">
         <div class="backToStartscreen" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
             onmouseleave="stopHoverEffect()">
-            <img class="restartImg" src="img/myImages/restart.png">
+            <img class="restartImg" src="img/myImages/newIcons/restartButton.png">
             <p>Try Again!</p>
         </div>
         <img id="looseImg" class="looseImg" src="img/9_intro_outro_screens/game_over/game over.png">
@@ -170,26 +172,27 @@
     <div id="informationscreen" class="informationscreen d-none">
         <div id="menuscreen" class="menuscreen">
             <div class="headline">
-            
+
                 <button class="backButtons" onclick="backToStartscreen()" onmouseover="playHoverEffect()"
-                    onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
-            
+                    onmouseleave="stopHoverEffect()"><img class="backButtonImg"
+                        src="img/myImages/newIcons/backButton.png" alt=""></button>
+
 
                 <h2>Informations</h2>
             </div>
             <div class="informationContent">
-                <div onclick="openImprint()" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()" class="personalContent">
+                <div onclick="openImprint()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()"
+                    class="personalContent">
                     <img src="img/myImages/newIcons/contactDetails.png">
                     <span>Imprint</span>
                 </div>
-                <div onclick="openDataProtection()" onmouseover="playHoverEffect()"
-                    onmouseleave="stopHoverEffect()" class="dataProtectionInformation">
+                <div onclick="openDataProtection()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()"
+                    class="dataProtectionInformation">
                     <img src="img/myImages/newIcons/icon.png">
-                    <span>Data Protection</span>
+                    <span>Used Icons</span>
                 </div>
-                <div onclick="openAboutTheGame()" onmouseover="playHoverEffect()"
-                    onmouseleave="stopHoverEffect()" class="dataProtectionInformation">
+                <div onclick="openAboutTheGame()" onmouseover="playHoverEffect()" onmouseleave="stopHoverEffect()"
+                    class="dataProtectionInformation">
                     <img src="img/myImages/newIcons/informations.png">
                     <span>About the game</span>
                 </div>
@@ -199,13 +202,14 @@
 
         <div id="imprintscreen" class="imprintAndDataProtectionscreen d-none">
             <div class="headline">
-            
+
                 <button class="backButtons" onclick="backToInformationScreen('imprint')" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
-                <h2>Impressum</h2>
+                    onmouseleave="stopHoverEffect()"><img class="backButtonImg"
+                        src="img/myImages/newIcons/backButton.png" alt=""></button>
+                <h2>Imprint</h2>
             </div>
             <div class="imprintContent">
-                <span>Impressum von:</span>
+                <span>Imprint of:</span>
                 <p>Florian Schoenfelder</p> <br>
                 <p>Niedersachsen</p>
                 <p>Deutschland</p>
@@ -213,44 +217,59 @@
         </div>
 
         <div id="dataProtectionscreen" class="imprintAndDataProtectionscreen d-none">
-            <div class="headline"> 
+            <div class="headline">
                 <button class="backButtons" onclick="backToInformationScreen('data')" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
-                <h2>Datenschutz</h2>
+                    onmouseleave="stopHoverEffect()"><img class="backButtonImg"
+                        src="img/myImages/newIcons/backButton.png" alt=""></button>
+                <h2>Used Icons</h2>
             </div>
             <div class="dataProtectionContent">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut neque aliquam veritatis quo cum
-                    accusantium, eius adipisci exercitationem culpa eaque accusamus ipsa fuga sunt odio illo harum.
-                    Voluptatem laboriosam amet, beatae nobis sit provident mollitia culpa voluptas excepturi optio ipsa
-                    fuga perferendis odio qui distinctio blanditiis, velit corporis fugiat sapiente necessitatibus!
-                    Explicabo nihil omnis, asperiores perspiciatis ducimus aspernatur atque voluptate quaerat? Animi
-                    velit eos error, repellendus culpa facilis nihil perspiciatis cupiditate modi hic, minima illo vel
-                    fugit ipsam delectus rerum amet, nulla voluptatibus veniam. Architecto nesciunt aliquid, explicabo
-                    repudiandae fuga velit nostrum debitis itaque illum dolor tenetur iure ad possimus!</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut neque aliquam veritatis quo cum
-                    accusantium, eius adipisci exercitationem culpa eaque accusamus ipsa fuga sunt odio illo harum.
-                    Voluptatem laboriosam amet, beatae nobis sit provident mollitia culpa voluptas excepturi optio ipsa
-                    fuga perferendis odio qui distinctio blanditiis, velit corporis fugiat sapiente necessitatibus!
-                    Explicabo nihil omnis, asperiores perspiciatis ducimus aspernatur atque voluptate quaerat? Animi
-                    velit eos error, repellendus culpa facilis nihil perspiciatis cupiditate modi hic, minima illo vel
-                    fugit ipsam delectus rerum amet, nulla voluptatibus veniam. Architecto nesciunt aliquid, explicabo
-                    repudiandae fuga velit nostrum debitis itaque illum dolor tenetur iure ad possimus!</p>
+                <div class="links">
+                    <a href="https://img.icons8.com/?size=100&id=x7JgdzaODNF2&format=png&color=000000"
+                        target="_blank">Back</a>
+                    <a href="https://img.icons8.com/?size=100&id=91299&format=png&color=000000"
+                        target="_blank">contactDetails</a>
+                    <a href="https://img.icons8.com/?size=100&id=dAGhaVRSty3p&format=png&color=000000"
+                        target="_blank">Controls</a>
+                    <a href="https://img.icons8.com/?size=100&id=Epg3wSlYXdZW&format=png&color=000000"
+                        target="_blank">Icon</a>
+                    <a href="https://img.icons8.com/?size=100&id=4G2DeaJvYebI&format=png&color=000000"
+                        target="_blank">Information</a>
+                    <a href="https://img.icons8.com/?size=100&id=114205&format=png&color=000000"
+                        target="_blank">Pause</a>
+                    <a href="https://img.icons8.com/?size=100&id=108811&format=png&color=000000"
+                        target="_blank">Play</a>
+                    <a href="https://img.icons8.com/?size=100&id=115634&format=png&color=000000"
+                        target="_blank">Restart</a>
+                    <a href="https://img.icons8.com/?size=100&id=V6fkPemfL7it&format=png&color=000000"
+                        target="_blank">Rotate</a>
+                    <a href="https://img.icons8.com/?size=100&id=36b58rhOlrlv&format=png&color=000000"
+                        target="_blank">Sound-Off</a>
+                    <a href="https://img.icons8.com/?size=100&id=122510&format=png&color=000000"
+                        target="_blank">Sound-On</a>
+                </div>
+
+            </div>
+            <div class="linkFooter">
+                <span>All Icons are used from <a href="https://icons8.com/icons">Icons8</a></span>
             </div>
         </div>
 
         <div id="aboutTheGamescreen" class="aboutTheGame d-none">
             <div class="headline">
-            
+
                 <button class="backButtons" onclick="backToInformationScreen('about')" onmouseover="playHoverEffect()"
-                onmouseleave="stopHoverEffect()"><img class="backButtonImg" src="img/myImages/newIcons/backButton.png" alt=""></button>
+                    onmouseleave="stopHoverEffect()"><img class="backButtonImg"
+                        src="img/myImages/newIcons/backButton.png" alt=""></button>
                 <h2>About El Pollo Loco</h2>
             </div>
             <div class="aboutTheGameContent">
-                <span>El Pollo Loco is a 2D action game in which a Mexican hero fights chicks, chickens and a giant chicken boss. Jump on chicks and chickens and throw Tabasco bottles at the boss to win.
+                <span>El Pollo Loco is a 2D action game in which a Mexican hero fights chicks, chickens and a giant
+                    chicken boss. Jump on chicks and chickens and throw Tabasco bottles at the boss to win.
                     Beat the boss to emerge victorious!</span>
-                    <br>
-                    <br>
-                    <span>Have fun!</span>
+                <br>
+                <br>
+                <span>Have fun!</span>
             </div>
         </div>
 
