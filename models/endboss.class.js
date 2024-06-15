@@ -6,7 +6,6 @@ class Endboss extends MoveableObject {
   deadAnimationPlayed = false;
   attackAnimationPlayed = false;
   animationInterval;
-
   attack_sound = new Audio("audio/endbossAttack.mp3");
   chickenDead_sound = new Audio("audio/chickenDead.mp3");
   endbossHurt_sound = new Audio("audio/endbossHurt.mp3");
@@ -73,6 +72,10 @@ class Endboss extends MoveableObject {
     this.animate();
   }
 
+  /**
+   * Sets an interval to control the animation behavior of the endboss character.
+   * Determines which animation sequence to play based on the character's state.
+   */
   animate() {
     this.animationInterval = setInterval(() => {
       if (this.isEndbossDead()) {
@@ -87,15 +90,27 @@ class Endboss extends MoveableObject {
     }, 200);
   }
 
+  /**
+   * Calculates the horizontal distance between the endboss and the character.
+   * @returns {number} The calculated distance.
+   */
   calculatedDistance() {
     let distance = this.x - world.character.x;
     return distance;
   }
 
+  /**
+   * Checks if the character is within a certain distance range to the endboss.
+   * @returns {boolean} True if the character is within the range, otherwise false.
+   */
   sawCharacter() {
     return this.calculatedDistance() <= 580;
   }
 
+  /**
+   * Initiates the dead animation sequence for the endboss.
+   * If the dead animation has already played, plays the final dead image.
+   */
   endbossDead() {
     if (!this.deadAnimationPlayed) {
       this.playDeadAnimation();
@@ -104,15 +119,21 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Plays the initial dead animation and triggers associated sounds.
+   */
   playDeadAnimation() {
     if (!muted) {
       this.chickenDead_sound.play();
     }
     this.deadAnimationPlayed = true;
     this.playAnimation(this.IMAGES_DEAD_ANIMATION);
-    setTimeout(() => {}, 1000);
+    setTimeout(() => {}, 1000); // Placeholder for any additional actions after animation
   }
 
+  /**
+   * Plays the final dead image of the endboss and initiates the end screen after a delay.
+   */
   playLastDeadImage() {
     this.playAnimation(this.IMAGES_DEAD_LAST);
     setTimeout(() => {
@@ -120,6 +141,10 @@ class Endboss extends MoveableObject {
     }, 1500);
   }
 
+  /**
+   * Initiates the hurt animation sequence for the endboss.
+   * Plays the hurt animation and associated sounds.
+   */
   endbossHurt() {
     this.playAnimation(this.IMAGES_HURT);
     if (!muted) {
@@ -127,27 +152,43 @@ class Endboss extends MoveableObject {
     }
   }
 
+  /**
+   * Initiates the attack animation sequence for the endboss.
+   * If the attack animation is not already playing, starts it and triggers attack sounds.
+   */
   attack() {
     if (!this.attackAnimationPlayed) {
       this.playAttackAnimation();
     }
   }
 
+  /**
+   * Plays the attack animation sequence for the endboss and triggers attack sounds.
+   * Sets a timeout to reset the attack animation state after a specified duration.
+   */
   playAttackAnimation() {
     this.playAnimation(this.IMAGES_ATTACK);
     if (!muted) {
       this.attack_sound.play();
     }
-    
+
     setTimeout(() => {
       this.attackAnimationPlayed = false;
     }, 1000);
   }
 
+  /**
+   * Initiates the walking animation sequence for the endboss.
+   * Moves the endboss to the left and plays the walking animation.
+   */
   animateWalking() {
     this.playAnimation(this.IMAGES_WALKING);
   }
 
+  /**
+   * Moves the endboss to the left and initiates the walking animation.
+   * Sets a flag to indicate that the endboss has detected the character.
+   */
   endbossWalk() {
     this.endbossDetectedPepe = true;
     this.moveLeft();

@@ -4,7 +4,7 @@ class Character extends MoveableObject {
   y = 190;
   speed = 6;
   world;
-  idleStartTime = null; // Variable to store the time when the condition first becomes true
+  idleStartTime = null;
   deadAnimationPlayed = false;
   now;
 
@@ -101,11 +101,19 @@ class Character extends MoveableObject {
     this.animate();
   }
 
+  /**
+   * Sets intervals for character movement and animation.
+   * The character moves at a rate of 60 frames per second and the animation changes every 150 milliseconds.
+   */
   animate() {
     this.movingInterval = setInterval(() => this.moveCharacter(), 1000 / 60);
     this.animationInterval = setInterval(() => this.playCharacter(), 150);
   }
 
+  /**
+   * Moves the character based on user input and adjusts the camera position.
+   * Pauses the walking sound when not moving.
+   */
   moveCharacter() {
     this.walking_sound.pause();
     if (this.canMoveRight() && this.isBeforeEndboss()) {
@@ -120,44 +128,72 @@ class Character extends MoveableObject {
     this.world.camera_x = -this.x + 100;
   }
 
+  /**
+   * Checks if the character can move right.
+   * @returns {boolean} - True if the right arrow key is pressed and the character has not reached the end of the level.
+   */
   canMoveRight() {
     return this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x;
   }
 
+  /**
+   * Checks if the character is before the end boss.
+   * @returns {boolean} - True if the right arrow key is pressed and the character has not reached the end boss.
+   */
   isBeforeEndboss() {
     return this.world.keyboard.RIGHT && this.x <= this.world.level.endboss[0].x;
   }
 
+  /**
+   * Moves the character to the right, plays the walking sound, and pauses the snoring sound.
+   * Sets the character's direction to right if the end boss is dead.
+   */
   moveRight() {
     if (this.isEndbossDead()) {
-      super.moveRight(); // Nach rechts laufen und Bild normal
+      super.moveRight();
       this.otherDirection = false;
     }
     if (!muted) {
-      this.walking_sound.play(); // Sound vom laufen abspielen
+      this.walking_sound.play();
     }
     this.snoring_sound.pause();
   }
 
+  /**
+   * Checks if the end boss is dead.
+   * @returns {boolean} - True if the end boss's death animation has not been played.
+   */
   isEndbossDead() {
     return !this.world.level.endboss[0].deadAnimationPlayed;
   }
 
+  /**
+   * Checks if the character can move left.
+   * @returns {boolean} - True if the left arrow key is pressed and the character's position is greater than 0.
+   */
   canMoveLeft() {
     return this.world.keyboard.LEFT && this.x > 0;
   }
 
+  /**
+   * Moves the character to the left, plays the walking sound, and pauses the snoring sound.
+   * Sets the character's direction to left if the end boss is dead.
+   */
   moveLeft() {
     if (this.isEndbossDead()) {
-      super.moveLeft(); // Nach links laufen und Bild gedreht
+      super.moveLeft();
       this.otherDirection = true;
     }
     if (!muted) {
-      this.walking_sound.play(); // Sound vom laufen abspielen
+      this.walking_sound.play();
     }
     this.snoring_sound.pause();
   }
 
+  /**
+   * Checks if the character can jump.
+   * @returns {boolean} - True if the up arrow or space key is pressed and the character is not above ground.
+   */
   canJump() {
     return (
       (this.world.keyboard.UP && !this.isAboveGround()) ||
@@ -165,6 +201,9 @@ class Character extends MoveableObject {
     );
   }
 
+  /**
+   * Makes the character jump and plays the jumping sound if the end boss is dead.
+   */
   jump() {
     if (this.isEndbossDead()) {
       super.jump();
@@ -174,6 +213,9 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Plays the appropriate character animation based on the character's state.
+   */
   playCharacter() {
     if (this.isHurt()) {
       this.getHurt();
@@ -188,6 +230,9 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Plays the hurt animation and sound if the character is hurt.
+   */
   getHurt() {
     this.playAnimation(this.IMAGES_HURT);
     if (!muted) {
@@ -195,6 +240,10 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Plays the dead animation sequence. If the dead animation has already been played,
+   * plays the last dead animation frame and shows the game over screen after a delay.
+   */
   playDeadSequence() {
     if (!this.deadAnimationPlayed) {
       this.playAnimation(this.IMAGES_DEAD_ANIMATION);
@@ -208,21 +257,35 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Plays the jumping animation and pauses the snoring sound if the character is above ground.
+   */
   playJumping() {
     this.playAnimation(this.IMAGES_JUMPING);
-    this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
+    this.idleStartTime = null;
     this.snoring_sound.pause();
   }
 
+  /**
+   * Checks if the character is moving.
+   * @returns {boolean} - True if the right or left arrow key is pressed.
+   */
   isMoving() {
     return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
+  /**
+   * Plays the walking animation if the character is moving.
+   */
   playMoving() {
-    this.idleStartTime = null; // Zurücksetzen des Timer für Idling des Charakter
+    this.idleStartTime = null;
     this.playAnimation(this.IMAGES_WALKING);
   }
 
+  /**
+   * Plays the idle animation or the long idle (snoring) animation if the character is idle for more than 6 seconds.
+   * Tracks the idle start time.
+   */
   playIdle() {
     this.now = Date.now();
     if (this.idleStartTime === null) {
@@ -236,6 +299,9 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+   * Plays the long idle (snoring) animation and sound if the sound is not muted.
+   */
   playSnoring() {
     this.playAnimation(this.IMAGES_LONG_IDLE);
     if (!muted) {

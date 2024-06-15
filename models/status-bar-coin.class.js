@@ -20,12 +20,26 @@ class StatusBarCoin extends DrawableObject {
     this.height = 55;
   }
 
+  /**
+   * Sets the percentage and updates the image based on the percentage value.
+   * @param {number} percentage - The percentage value to set (0 to 100).
+   */
   setPercentages(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES_COIN[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Resolves the image index based on the current percentage value.
+   * @returns {number} The index of the image in IMAGES_COIN array based on percentage categories:
+   * - 100: Index 5
+   * - 80-99: Index 4
+   * - 60-79: Index 3
+   * - 40-59: Index 2
+   * - 20-39: Index 1
+   * - 0-19: Index 0
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

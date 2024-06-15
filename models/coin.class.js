@@ -1,6 +1,4 @@
 class Coin extends MoveableObject {
-  // y = 355;
-
   coinCollecting_sound = new Audio("audio/coinCollected.mp3");
   animationInterval;
 
@@ -26,12 +24,19 @@ class Coin extends MoveableObject {
     this.animateCoin();
   }
 
+  /**
+   * Sets an interval to play the walking animation for the coin.
+   * The animation changes every 750 milliseconds.
+   */
   animateCoin() {
     this.animationInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 750);
   }
 
+  /**
+   * Plays the coin collecting sound at full volume if the sound is not muted.
+   */
   collectCoinSound() {
     if (!muted) {
       this.coinCollecting_sound.volume = 1;

@@ -4,10 +4,8 @@ class Chicken extends MoveableObject {
   dead = false;
   walkingImagesInterval;
   walkingInterval;
-
   intervalIds = [];
   i = 1;
-
   chickenDead_sound = new Audio("audio/chickenDead.mp3");
 
   offset = {
@@ -15,7 +13,7 @@ class Chicken extends MoveableObject {
     left: 5,
     right: 5,
     bottom: 0,
-} 
+  };
 
   IMAGES_WALKING = [
     "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -23,9 +21,7 @@ class Chicken extends MoveableObject {
     "img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
 
-  IMAGES_DEAD = [
-    "img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
-  ];
+  IMAGES_DEAD = ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png"];
 
   currentImage = 0;
 
@@ -39,18 +35,30 @@ class Chicken extends MoveableObject {
     this.animateWalking();
   }
 
+  /**
+   * Sets an interval to play the walking animation for the character.
+   * The animation changes every 200 milliseconds.
+   */
   animateWalking() {
     this.walkingImagesInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 200);
   }
 
+  /**
+   * Sets an interval to move the character to the left.
+   * The character moves at a rate of 120 frames per second.
+   */
   animate() {
     this.walkingInterval = setInterval(() => {
       this.moveLeft();
     }, 1000 / 120);
   }
 
+  /**
+   * Plays the dead animation and stops the walking and animation intervals.
+   * Also plays the chicken dead sound if the sound is not muted.
+   */
   chickenDead() {
     this.playAnimation(this.IMAGES_DEAD);
     clearInterval(this.walkingImagesInterval);
@@ -58,6 +66,5 @@ class Chicken extends MoveableObject {
     if (!muted) {
       this.chickenDead_sound.play();
     }
-    
   }
 }
