@@ -650,6 +650,23 @@ li:nth-child(3) {
   .informationContent div span {
     display: none;
   }
+
+  #controlsForMobile {
+    bottom: 28px;
+    padding: 0px 65px;
+  }
+
+  .moving > svg {
+    height: 35px;
+  }
+
+  .jumpingAndThrow > svg {
+    height: 35px;
+  }
+
+  .jumpingAndThrow > img {
+    height: 35px;
+  }
 }
 
 @media only screen and (max-height: 520px) {
