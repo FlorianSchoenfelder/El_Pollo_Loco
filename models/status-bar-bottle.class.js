@@ -10,9 +10,13 @@ class StatusBarBottle extends DrawableObject {
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
   ];
 
+  /**
+   * Creates an instance of the BottleContainer class and initializes it with images and dimensions.
+   *
+   * @constructor
+   */
   constructor() {
     super();
-
     this.loadImages(this.IMAGES_BOTTLE);
     this.setPercentages(0);
     this.x = 20;

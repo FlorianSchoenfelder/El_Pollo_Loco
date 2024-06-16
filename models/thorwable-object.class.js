@@ -19,6 +19,13 @@ class ThrowableObject extends MoveableObject {
     "img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
 
+  /**
+   * Creates an instance of the SalsaBottle class and initializes it with images, position, and actions.
+   *
+   * @constructor
+   * @param {number} x - The x-coordinate for the salsa bottle's position.
+   * @param {number} y - The y-coordinate for the salsa bottle's position.
+   */
   constructor(x, y) {
     super().loadImage("img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.IMAGES_SPLASH);

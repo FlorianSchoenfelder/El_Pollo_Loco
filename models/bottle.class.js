@@ -19,6 +19,11 @@ class Bottle extends MoveableObject {
     "img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
   ];
 
+  /**
+   * Creates an instance of the Bottle class and initializes it with an image and a random position.
+   *
+   * @constructor
+   */
   constructor() {
     super().loadImage(this.IMAGES_Bottle_GROUND[0]);
     this.loadImages(this.IMAGES_Bottle_GROUND);

@@ -5,6 +5,11 @@ class Cloud extends MoveableObject {
   speed = 0.1;
   animationInterval;
 
+  /**
+   * Creates an instance of the Cloud class and initializes it with an image and a random position.
+   *
+   * @constructor
+   */
   constructor() {
     super().loadImage("img/5_background/layers/4_clouds/1.png");
     this.x = -440 + Math.random() * 2440;

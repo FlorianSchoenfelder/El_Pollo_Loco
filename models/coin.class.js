@@ -16,6 +16,11 @@ class Coin extends MoveableObject {
     "img/8_coin/coin_2.png",
   ];
 
+  /**
+   * Creates an instance of the Coin class and initializes it with images and random positions.
+   *
+   * @constructor
+   */
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);

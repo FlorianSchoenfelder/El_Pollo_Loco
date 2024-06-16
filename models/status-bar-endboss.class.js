@@ -8,6 +8,11 @@ class StatusBarEndboss extends DrawableObject {
     "img/7_statusbars/2_statusbar_endboss/green/green100.png",
   ];
 
+  /**
+   * Creates an instance of the EndbossContainer class and initializes it with images and dimensions.
+   *
+   * @constructor
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES_ENDBOSS);

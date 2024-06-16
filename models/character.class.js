@@ -88,6 +88,11 @@ class Character extends MoveableObject {
 
   IMAGES_DEAD_LAST = ["img/2_character_pepe/5_dead/D-57.png"];
 
+  /**
+   * Creates an instance of the Character class and initializes it with images, animations, and gravity.
+   *
+   * @constructor
+   */
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_WALKING);

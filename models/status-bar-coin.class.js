@@ -10,6 +10,11 @@ class StatusBarCoin extends DrawableObject {
     "img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png",
   ];
 
+  /**
+   * Creates an instance of the CoinContainer class and initializes it with images and dimensions.
+   *
+   * @constructor
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES_COIN);

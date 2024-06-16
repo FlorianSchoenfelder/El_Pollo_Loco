@@ -368,8 +368,8 @@ window.addEventListener("keydown", (e) => {
     case 83:
       keyboard.DOWN = true;
       break;
-    case 66:
-      keyboard.B = true;
+    case 70:
+      keyboard.F = true;
       break;
     case 32:
       keyboard.SPACE = true;
@@ -395,8 +395,8 @@ window.addEventListener("keyup", (e) => {
     case 83:
       keyboard.DOWN = false;
       break;
-    case 66:
-      keyboard.B = false;
+    case 70:
+      keyboard.F = false;
       break;
     case 32:
       keyboard.SPACE = false;
@@ -436,10 +436,10 @@ document.getElementById("jump").addEventListener("pointerup", (e) => {
 
 document.getElementById("bottleThrow").addEventListener("pointerdown", (e) => {
   e.preventDefault();
-  keyboard.B = true;
+  keyboard.F = true;
 });
 
 document.getElementById("bottleThrow").addEventListener("pointerup", (e) => {
   e.preventDefault();
-  keyboard.B = false;
+  keyboard.F = false;
 });

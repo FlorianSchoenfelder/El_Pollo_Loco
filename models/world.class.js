@@ -19,6 +19,13 @@ class World {
 
   intervalIds = [];
 
+  /**
+   * Creates an instance of the Game class and initializes it with a canvas and keyboard input.
+   *
+   * @constructor
+   * @param {HTMLCanvasElement} canvas - The canvas element used for rendering.
+   * @param {Keyboard} keyboard - The keyboard input handler.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -82,7 +89,7 @@ class World {
       this.endbossAttack();
       this.muteAll();
       this.unmuteAll();
-    }, 50);
+    }, 10);
   }
 
   /**
@@ -113,7 +120,7 @@ class World {
    * @returns {boolean} True if the throw button is pressed and the throw action is not in progress, false otherwise.
    */
   isthrowingButtonPressed() {
-    return this.keyboard.B && this.throwingButtonPressed == false;
+    return this.keyboard.F && this.throwingButtonPressed == false;
   }
 
   /**

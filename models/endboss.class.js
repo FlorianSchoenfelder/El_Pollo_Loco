@@ -60,6 +60,11 @@ class Endboss extends MoveableObject {
 
   IMAGES_DEAD_LAST = ["img/4_enemie_boss_chicken/5_dead/G26.png"];
 
+  /**
+   * Creates an instance of the Enemy class and initializes it with images and animations.
+   *
+   * @constructor
+   */
   constructor() {
     super().loadImage(this.IMAGES_ALERT[0]);
     this.loadImages(this.IMAGES_ALERT);
